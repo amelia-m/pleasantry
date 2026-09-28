@@ -1,0 +1,105 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# compliment
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+compliment generates randomized compliments and farewells, from sincere
+encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
+Use it to add a bit of positivity (or hostility, or iambic flair) to
+scripts, apps, and console output.
+
+## Installation
+
+You can install the development version of compliment like so:
+
+``` r
+# install.packages("pak")
+pak::pak("path/to/compliment")
+```
+
+## Compliments
+
+`compliment()` generates one or more random compliments:
+
+```{r}
+library(compliment)
+
+set.seed(101)
+compliment()
+compliment(3)
+```
+
+### Weirdness
+
+The `weirdness` argument moves content along a spectrum from sincere (0)
+through quirky (0.5) to bizarre (1), with adjacent tiers blending at
+intermediate values:
+
+```{r}
+set.seed(202)
+compliment(weirdness = 0.5)
+compliment(weirdness = 1)
+```
+
+### Mood
+
+The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"`
+(backhanded), `"cheerful"`, or `"dramatic"`:
+
+```{r}
+set.seed(303)
+compliment(mood = "grumpy")
+compliment(mood = "dramatic")
+```
+
+### Profanity and Shakespearean styling
+
+`profanity` (`"none"`, `"mild"`, or `"strong"`) adds intensifiers and
+trailing clauses, and `shakespearean = TRUE` switches to
+pseudo-Shakespearean language. Both compose with `mood` and
+`weirdness`:
+
+```{r}
+set.seed(404)
+compliment(mood = "grumpy", profanity = "mild")
+compliment(mood = "dramatic", shakespearean = TRUE)
+compliment(mood = "grumpy", shakespearean = TRUE, weirdness = 1)
+```
+
+## Farewells
+
+`farewell()` generates random goodbyes with the same `mood`,
+`profanity`, and `shakespearean` options:
+
+```{r}
+set.seed(505)
+farewell()
+farewell(mood = "grumpy")
+farewell(mood = "cheerful", shakespearean = TRUE)
+```
+
+## Compliment and farewell of the day
+
+`compliment_of_the_day()` and `farewell_of_the_day()` return a single
+result that is deterministic for a given date, without disturbing the
+global RNG state:
+
+```{r}
+compliment_of_the_day()
+farewell_of_the_day("2026-01-01", mood = "grumpy")
+```
