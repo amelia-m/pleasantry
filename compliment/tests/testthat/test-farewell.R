@@ -29,3 +29,18 @@ test_that("farewell() adds profanity when requested", {
   result <- farewell(20, profanity = "strong")
   expect_true(any(grepl("fucking|goddamn|bastard|bullshit", result)))
 })
+
+test_that("farewell() profanity = \"tame\" uses funny clean words", {
+  set.seed(1357)
+  result <- farewell(20, profanity = "tame")
+  expect_true(any(grepl("fudging|flipping|biscuit|bullhonky|fudge", result)))
+  expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
+})
+
+test_that("farewell() profanity = \"weird\" uses the extra-weird set", {
+  set.seed(1357)
+  result <- farewell(20, profanity = "weird")
+  weird_words <- "blorping|squidging|walrus|gravy|googly|wombat"
+  expect_true(any(grepl(weird_words, result)))
+  expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
+})

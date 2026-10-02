@@ -8,6 +8,7 @@ Description: Generates randomized, encouraging compliments by combining
     templates with random adjectives and subjects. Useful for adding a
     bit of positivity to scripts, apps, or console output.
 License: MIT + file LICENSE
+URL: https://amelia-m.github.io/compliment/
 Depends: 
     R (>= 4.1.0)
 Encoding: UTF-8

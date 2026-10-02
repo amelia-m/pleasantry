@@ -417,16 +417,32 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
   }
   intensifiers <- switch(
     profanity,
+    tame = c("fudging", "flipping", "gosh-darn", "mother-flipping"),
     mild = c("damn", "darn", "blinking"),
-    strong = c("fucking", "goddamn")
+    strong = c("fucking", "goddamn"),
+    weird = c("blorping", "squidging", "wombat-flipping", "heckity-heck")
   )
   suffixes <- switch(
     profanity,
+    tame = c(
+      "and I fudging mean it",
+      "you magnificent son of a biscuit",
+      "no bullhonky",
+      "for fudge's sake",
+      "oh, fudge-muffins"
+    ),
     mild = c("darn it", "as heck", "and I mean it, darn it"),
     strong = c(
       "and I fucking mean it",
       "you magnificent bastard",
       "no bullshit"
+    ),
+    weird = c(
+      "and I blorping mean it",
+      "you magnificent space walrus",
+      "no bullhonky, said the raccoon oracle",
+      "for the love of sentient gravy",
+      "great googly moogly"
     )
   )
 

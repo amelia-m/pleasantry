@@ -2,3 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
+^dev-history\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

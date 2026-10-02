@@ -60,7 +60,7 @@
       compliment(profanity = "extreme")
     Condition
       Error in `match.arg()`:
-      ! 'arg' should be one of "none", "mild", "strong"
+      ! 'arg' should be one of "none", "tame", "mild", "strong", "weird"
 
 ---
 

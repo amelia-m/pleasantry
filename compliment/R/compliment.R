@@ -19,9 +19,13 @@
 #' @param mood The tone of the compliment: `"sincere"` (default),
 #'   `"grumpy"` (backhanded compliments), `"cheerful"` (over-the-top
 #'   warmth), or `"dramatic"` (epic, life-or-death stakes).
-#' @param profanity Profanity level: `"none"` (default), `"mild"`
-#'   (e.g. "damn", "heck"), or `"strong"` (four-letter words). Profanity
-#'   is added as an intensifier before the adjective or a trailing clause.
+#' @param profanity Profanity level: `"none"` (default, no profanity),
+#'   `"tame"` (funny clean words like "fudging" and "oh, fudge-muffins"),
+#'   `"mild"` (e.g. "damn", "heck"), `"strong"` (four-letter words; note
+#'   this tier ships explicit language in the package source), or
+#'   `"weird"` (an extra-weird clean set, e.g. "blorping", "you
+#'   magnificent space walrus"). Profanity is added as an intensifier
+#'   before the adjective or a trailing clause.
 #' @param shakespearean If `TRUE`, use pseudo-Shakespearean language and
 #'   structure. Each mood has its own Shakespearean bank.
 #'
@@ -34,12 +38,13 @@
 #' compliment(3, weirdness = 0.5)
 #' compliment(3, mood = "grumpy")
 #' compliment(3, mood = "dramatic", shakespearean = TRUE)
-#' compliment(3, mood = "grumpy", profanity = "mild")
+#' compliment(3, mood = "grumpy", profanity = "tame")
+#' compliment(3, mood = "grumpy", profanity = "weird")
 compliment <- function(
   n = 1,
   weirdness = 0,
   mood = c("sincere", "grumpy", "cheerful", "dramatic"),
-  profanity = c("none", "mild", "strong"),
+  profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
   if (!is.numeric(n) || length(n) != 1 || n < 1 || n != as.integer(n)) {
@@ -62,7 +67,6 @@ compliment <- function(
   ) {
     cli::cli_abort("{.arg shakespearean} must be `TRUE` or `FALSE`.")
   }
-
   spec <- compliment_banks(mood, shakespearean)
   # Each component is drawn from a tier with triangular weights centered
   # on the requested weirdness, so adjacent tiers blend at intermediate

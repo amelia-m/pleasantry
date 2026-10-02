@@ -7,7 +7,7 @@
 farewell(
   n = 1,
   mood = c("sincere", "grumpy", "cheerful", "dramatic"),
-  profanity = c("none", "mild", "strong"),
+  profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 )
 }
@@ -18,9 +18,12 @@ farewell(
 \code{"grumpy"} (curt, passive-aggressive), \code{"cheerful"} (over-the-top
 warmth), or \code{"dramatic"} (theatrical, life-or-death stakes).}
 
-\item{profanity}{Profanity level: \code{"none"} (default), \code{"mild"}
-(e.g. "damn", "heck"), or \code{"strong"} (four-letter words). Profanity
-is added as a trailing clause.}
+\item{profanity}{Profanity level: \code{"none"} (default, no profanity),
+\code{"tame"} (funny clean words like "fudging" and "oh, fudge-muffins"),
+\code{"mild"} (e.g. "damn", "heck"), \code{"strong"} (four-letter words; note
+this tier ships explicit language in the package source), or
+\code{"weird"} (an extra-weird clean set, e.g. "blorping", "you
+magnificent space walrus"). Profanity is added as a trailing clause.}
 
 \item{shakespearean}{If \code{TRUE}, use pseudo-Shakespearean language and
 structure. Each mood has its own Shakespearean farewells.}
@@ -37,4 +40,5 @@ farewell()
 farewell(3, mood = "grumpy")
 farewell(3, mood = "dramatic", shakespearean = TRUE)
 farewell(mood = "grumpy", profanity = "strong")
+farewell(mood = "grumpy", profanity = "weird")
 }
