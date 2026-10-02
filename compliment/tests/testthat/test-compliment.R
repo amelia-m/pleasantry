@@ -98,6 +98,22 @@ test_that("subjects are singular to agree with template verbs", {
   expect_false(any(grepl(plurals, result)))
 })
 
+test_that("profanity = \"tame\" uses funny clean words", {
+  set.seed(6789)
+  result <- compliment(20, profanity = "tame")
+  expect_true(any(grepl("fudging|flipping|biscuit|bullhonky|fudge", result)))
+  expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
+})
+
+test_that("profanity = \"weird\" uses the extra-weird set", {
+  set.seed(6789)
+  result <- compliment(20, profanity = "weird")
+  weird_words <- "blorping|squidging|walrus|gravy|googly|wombat"
+  expect_true(any(grepl(weird_words, result)))
+  expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
+  expect_false(any(grepl("fudging|biscuit", result)))
+})
+
 test_that("compliment() errors for invalid mood, profanity, and shakespearean", {
   expect_snapshot(compliment(mood = "furious"), error = TRUE)
   expect_snapshot(compliment(profanity = "extreme"), error = TRUE)

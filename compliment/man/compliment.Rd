@@ -8,7 +8,7 @@ compliment(
   n = 1,
   weirdness = 0,
   mood = c("sincere", "grumpy", "cheerful", "dramatic"),
-  profanity = c("none", "mild", "strong"),
+  profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 )
 }
@@ -30,9 +30,13 @@ a bizarre Shakespearean bank.}
 \code{"grumpy"} (backhanded compliments), \code{"cheerful"} (over-the-top
 warmth), or \code{"dramatic"} (epic, life-or-death stakes).}
 
-\item{profanity}{Profanity level: \code{"none"} (default), \code{"mild"}
-(e.g. "damn", "heck"), or \code{"strong"} (four-letter words). Profanity
-is added as an intensifier before the adjective or a trailing clause.}
+\item{profanity}{Profanity level: \code{"none"} (default, no profanity),
+\code{"tame"} (funny clean words like "fudging" and "oh, fudge-muffins"),
+\code{"mild"} (e.g. "damn", "heck"), \code{"strong"} (four-letter words; note
+this tier ships explicit language in the package source), or
+\code{"weird"} (an extra-weird clean set, e.g. "blorping", "you
+magnificent space walrus"). Profanity is added as an intensifier
+before the adjective or a trailing clause.}
 
 \item{shakespearean}{If \code{TRUE}, use pseudo-Shakespearean language and
 structure. Each mood has its own Shakespearean bank.}
@@ -52,5 +56,6 @@ compliment(3)
 compliment(3, weirdness = 0.5)
 compliment(3, mood = "grumpy")
 compliment(3, mood = "dramatic", shakespearean = TRUE)
-compliment(3, mood = "grumpy", profanity = "mild")
+compliment(3, mood = "grumpy", profanity = "tame")
+compliment(3, mood = "grumpy", profanity = "weird")
 }

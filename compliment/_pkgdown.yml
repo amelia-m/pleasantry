@@ -1,0 +1,13 @@
+# TODO: confirm once a repo host/visibility is decided (inferred from
+# the amelia-m.github.io sibling directory).
+url: https://amelia-m.github.io/compliment/
+
+reference:
+  - title: Compliments
+    contents:
+      - compliment
+      - compliment_of_the_day
+  - title: Farewells
+    contents:
+      - farewell
+      - farewell_of_the_day
