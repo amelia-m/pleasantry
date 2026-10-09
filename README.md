@@ -4,7 +4,6 @@
 # pleasantry
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 pleasantry generates randomized compliments and farewells, from sincere
@@ -110,8 +109,8 @@ result that is deterministic for a given date, without disturbing the
 global RNG state:
 
 ``` r
-compliment_of_the_day()
-#> [1] "Few people have a energy as creative as yours."
+compliment_of_the_day("2026-01-01")
+#> [1] "You have a remarkably insightful perspective."
 farewell_of_the_day("2026-01-01", mood = "grumpy")
 #> [1] "Off you go. Don't make it weird."
 ```

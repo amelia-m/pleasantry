@@ -106,6 +106,6 @@ result that is deterministic for a given date, without disturbing the
 global RNG state:
 
 ```{r}
-compliment_of_the_day()
+compliment_of_the_day("2026-01-01")
 farewell_of_the_day("2026-01-01", mood = "grumpy")
 ```
