@@ -1,0 +1,13 @@
+^pleasantry\.Rproj$
+^\.Rproj\.user$
+# The Positron Assistant development transcripts. They sat outside the
+# package while it lived in a subdirectory; now that the package is at
+# the repo root they would otherwise be built into the tarball (~15 MB).
+^\.posit$
+^\.github$
+^LICENSE\.md$
+^README\.Rmd$
+^dev-history\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

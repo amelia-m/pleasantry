@@ -1,4 +1,4 @@
-# compliment (development version)
+# pleasantry (development version)
 
 * `compliment()` gains a `weirdness` argument (`0`-`1`) that places content on a three-tier spectrum (classic, quirky, bizarre) and independently draws each component (template, adjective, subject) from a tier with triangular weights centered on `weirdness`, so intermediate values blend the two adjacent tiers.
 * `compliment()` no longer duplicates an adjective that already appears in the chosen template (e.g. "inspiring ... truly inspiring").

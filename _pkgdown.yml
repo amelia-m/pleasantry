@@ -1,0 +1,16 @@
+# Assumes the repo is renamed to amelia-m/pleasantry to match the
+# package; that is where GitHub Pages would then serve the site from.
+# As of this commit the repo is still posit-conf-2026-compliments, and
+# nothing is deployed either way: the site has to be built and Pages
+# enabled first.
+url: https://amelia-m.github.io/pleasantry/
+
+reference:
+  - title: Compliments
+    contents:
+      - compliment
+      - compliment_of_the_day
+  - title: Farewells
+    contents:
+      - farewell
+      - farewell_of_the_day

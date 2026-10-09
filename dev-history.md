@@ -1,7 +1,7 @@
-# compliment development history
+# pleasantry development history
 
 A curated summary of the design decisions made while building the
-`compliment` package (September–October 2026). This document is excluded
+`pleasantry` package (September–October 2026). This document is excluded
 from the built package via `.Rbuildignore`.
 
 ## Package genesis
