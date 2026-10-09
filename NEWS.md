@@ -1,6 +1,7 @@
 # pleasantry (development version)
 
 * The package is renamed from compliment to **pleasantry**, because it generates farewells as well as compliments. Function names are unchanged (`compliment()`, `compliment_of_the_day()`, `farewell()`, `farewell_of_the_day()`); `library(compliment)` no longer works. Install with `pak::pak("amelia-m/pleasantry")`.
+* Indefinite articles now agree with the word that follows them. Templates hardcoded "a", so a vowel-initial subject or adjective produced "Few people have a energy as creative as yours." Templates write `{a}`/`{A}` instead, resolved after the adjective, subject and any profanity intensifier are in place — the intensifier sits between the article and the adjective, so it is the word the article has to agree with.
 * `compliment()` gains a `weirdness` argument (`0`-`1`) that places content on a three-tier spectrum (classic, quirky, bizarre) and independently draws each component (template, adjective, subject) from a tier with triangular weights centered on `weirdness`, so intermediate values blend the two adjacent tiers.
 * `compliment()` no longer duplicates an adjective that already appears in the chosen template (e.g. "inspiring ... truly inspiring").
 * `compliment()` and `farewell()` gain funny-clean profanity options: `profanity` now has five levels — `"none"` (default), `"tame"` (e.g. "fudging", "oh, fudge-muffins"), `"mild"`, `"strong"`, and `"weird"` (e.g. "blorping", "you magnificent space walrus").

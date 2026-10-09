@@ -93,7 +93,9 @@ compliment <- function(
     }
     template <- sub("{adjective}", adjective, template, fixed = TRUE)
     text <- sub("{subject}", subject, template, fixed = TRUE)
-    apply_profanity(text, profanity, adjective)
+    # Articles last: the profanity intensifier lands between {a} and the
+    # adjective, so it is the word the article has to agree with.
+    apply_articles(apply_profanity(text, profanity, adjective))
   }
 
   vapply(seq_len(n), \(i) build_one(), character(1))
