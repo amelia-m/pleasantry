@@ -114,3 +114,23 @@ compliment_of_the_day("2026-01-01")
 farewell_of_the_day("2026-01-01", mood = "grumpy")
 #> [1] "Off you go. Don't make it weird."
 ```
+
+## How this was built
+
+Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern
+R workflow (ft. Positron and
+AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on
+Monday, September 14, using Positron Assistant throughout, and built out
+afterwards until the workshop’s allocated AI credits ran out.
+
+The full development conversation is kept on the
+[`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts)
+branch as Markdown, HTML and JSON, so the workflow that produced the
+package is readable alongside the result – design dead ends included:
+the `weirdness` argument went through four designs before the three-tier
+version, and a late refactor collapsed two redundant arguments into the
+single five-level `profanity`. A much shorter summary is in
+`dev-history.md`.
+
+It lives on its own branch because it is 15 MB against a 12 KB package,
+and installing from GitHub fetches a snapshot of the default branch.
