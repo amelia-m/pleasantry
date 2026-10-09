@@ -1,0 +1,14 @@
+# Matches the public repo name (amelia-m/pleasantry), which is where
+# GitHub Pages would serve the site from. Nothing is deployed there yet:
+# the site still has to be built and Pages enabled.
+url: https://amelia-m.github.io/pleasantry/
+
+reference:
+  - title: Compliments
+    contents:
+      - compliment
+      - compliment_of_the_day
+  - title: Farewells
+    contents:
+      - farewell
+      - farewell_of_the_day

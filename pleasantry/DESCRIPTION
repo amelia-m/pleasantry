@@ -1,0 +1,24 @@
+Package: pleasantry
+Title: Generate Randomized Compliments and Farewells
+Version: 0.0.0.9000
+Authors@R: 
+    person("Amelia", "Miramonti", , "amiramonti@nebraska.edu", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-0277-4064"))
+Description: Generates randomized compliments and farewells by combining
+    templates with random adjectives and subjects, with controls for mood,
+    weirdness, profanity, and pseudo-Shakespearean phrasing. Useful for
+    adding a bit of positivity (or hostility, or iambic flair) to scripts,
+    apps, or console output.
+License: MIT + file LICENSE
+URL: https://amelia-m.github.io/pleasantry/
+Depends: 
+    R (>= 4.1.0)
+Encoding: UTF-8
+Language: en
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    cli
+Config/roxygen2/version: 8.1.0
