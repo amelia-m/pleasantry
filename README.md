@@ -18,7 +18,7 @@ You can install the development version of pleasantry like so:
 
 ``` r
 # install.packages("pak")
-pak::pak("path/to/pleasantry")
+pak::pak("amelia-m/pleasantry")
 ```
 
 ## Compliments
