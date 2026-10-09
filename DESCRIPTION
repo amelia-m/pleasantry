@@ -11,6 +11,7 @@ Description: Generates randomized compliments and farewells by combining
     apps, or console output.
 License: MIT + file LICENSE
 URL: https://amelia-m.github.io/pleasantry/
+BugReports: https://github.com/amelia-m/pleasantry/issues
 Depends: 
     R (>= 4.1.0)
 Encoding: UTF-8
