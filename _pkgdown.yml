@@ -1,6 +1,11 @@
 # Matches the repo name (amelia-m/pleasantry), which is the path GitHub
-# Pages serves a project site from. Nothing is deployed there yet: Pages
-# has to be enabled and a pkgdown build added, until which this 404s.
+# Pages serves a project site from. .github/workflows/pkgdown.yaml builds
+# the site on every push to main and pushes it to the gh-pages branch; the
+# remaining step is to point Pages at that branch in the repo settings,
+# until which this still 404s.
+#
+# Every exported function has to appear under `reference` below or the
+# build fails, so a new export needs a line here too.
 url: https://amelia-m.github.io/pleasantry/
 
 reference:
