@@ -96,7 +96,7 @@ Ran every applicable check from the extrachecks list:
 | No `\dontrun{}` / commented-out example code | Pass |
 | DESCRIPTION Title (title case, <65 chars) | Pass |
 | DESCRIPTION Description formatting rules | Pass |
-| No URLs in package | Pass |
+| No URLs in package | Pass at the time; URL and BugReports were added later with the rename, and the URL 404s until Pages is deployed |
 | LICENSE year current (2026) | Pass |
 | `cph` role in Authors@R | **Fixed** — added, and LICENSE holder synced to Amelia Miramonti |
 | `noSuggests` robustness | Accepted risk (only Suggests is testthat; rarely enforced) |

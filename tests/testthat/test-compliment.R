@@ -119,3 +119,50 @@ test_that("compliment() errors for invalid mood, profanity, and shakespearean", 
   expect_snapshot(compliment(profanity = "extreme"), error = TRUE)
   expect_snapshot(compliment(shakespearean = "yes"), error = TRUE)
 })
+
+test_that("indefinite articles agree with the word that follows", {
+  expect_equal(pleasantry:::indefinite_article("energy"), "an")
+  expect_equal(pleasantry:::indefinite_article("wit"), "a")
+  expect_equal(pleasantry:::indefinite_article("Attitude"), "an")
+  # Spelled with a vowel, pronounced with a consonant, and the reverse.
+  expect_equal(pleasantry:::indefinite_article("unicorn"), "a")
+  expect_equal(pleasantry:::indefinite_article("one-liner"), "a")
+  expect_equal(pleasantry:::indefinite_article("hour"), "an")
+  expect_equal(pleasantry:::indefinite_article("honest"), "an")
+  expect_equal(pleasantry:::indefinite_article("haircut"), "a")
+
+  expect_equal(pleasantry:::apply_articles("have {a} energy here"), "have an energy here")
+  expect_equal(pleasantry:::apply_articles("have {a} wit here"), "have a wit here")
+  expect_equal(pleasantry:::apply_articles("{A} energy so epic!"), "An energy so epic!")
+  expect_equal(pleasantry:::apply_articles("{A} wit so epic!"), "A wit so epic!")
+  # The profanity intensifier is inserted between the article and the
+  # adjective, so the article has to agree with the intensifier.
+  expect_equal(
+    pleasantry:::apply_articles("what {a} fudging eldritch familiar"),
+    "what a fudging eldritch familiar"
+  )
+})
+
+test_that("generated compliments never mismatch an indefinite article", {
+  set.seed(1)
+  bad <- character()
+  for (mood in c("sincere", "grumpy", "cheerful", "dramatic")) {
+    for (shakespearean in c(FALSE, TRUE)) {
+      for (weirdness in c(0, 0.5, 1)) {
+        for (profanity in c("none", "tame", "weird")) {
+          out <- compliment(
+            120,
+            weirdness = weirdness, mood = mood,
+            profanity = profanity, shakespearean = shakespearean
+          )
+          bad <- c(
+            bad,
+            grep("\\ba (?=[aeiou])|\\ban (?=[^aeiou ])|\\{[aA]\\}",
+                 out, perl = TRUE, value = TRUE)
+          )
+        }
+      }
+    }
+  }
+  expect_equal(bad, character())
+})

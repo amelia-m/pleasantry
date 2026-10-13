@@ -8,7 +8,7 @@ compliment_banks <- function(mood, shakespearean) {
         "You have a remarkably {adjective} {subject}.",
         "People admire your {adjective} {subject}.",
         "Your {subject} is nothing short of {adjective}.",
-        "Few people have a {subject} as {adjective} as yours."
+        "Few people have {a} {subject} as {adjective} as yours."
       ),
       adjectives = c(
         "brilliant",
@@ -96,9 +96,9 @@ compliment_banks <- function(mood, shakespearean) {
     dramatic = list(
       templates = c(
         "Your {adjective} {subject} shall be sung of for a thousand years.",
-        "Kings would abdicate for a {subject} as {adjective} as yours.",
+        "Kings would abdicate for {a} {subject} as {adjective} as yours.",
         "The heavens themselves weep at your {adjective} {subject}.",
-        "Never in recorded history has a {subject} been so {adjective}.",
+        "Never in recorded history has {a} {subject} been so {adjective}.",
         "Your {adjective} {subject} will echo through eternity."
       ),
       adjectives = c(
@@ -213,8 +213,8 @@ compliment_banks <- function(mood, shakespearean) {
       templates = c(
         "Thy {adjective} {subject} doth put the summer's day to shame.",
         "Verily, thy {subject} is most {adjective}.",
-        "O, what a {adjective} {subject} thou dost possess!",
-        "I prithee, never hide so {adjective} a {subject}."
+        "O, what {a} {adjective} {subject} thou dost possess!",
+        "I prithee, never hide so {adjective} {a} {subject}."
       ),
       adjectives = c(
         "gentle",
@@ -260,7 +260,7 @@ compliment_banks <- function(mood, shakespearean) {
     cheerful = list(
       templates = c(
         "Huzzah! Thy {adjective} {subject} maketh the lark itself rejoice!",
-        "O joy! O rapture! What a {adjective} {subject} thou hast!",
+        "O joy! O rapture! What {a} {adjective} {subject} thou hast!",
         "Thy {adjective} {subject} is a festival unto mine eyes!",
         "Zounds, thy {subject} is {adjective} beyond all measure!"
       ),
@@ -284,7 +284,7 @@ compliment_banks <- function(mood, shakespearean) {
     dramatic = list(
       templates = c(
         "Thy {adjective} {subject} shall outlive the very stars!",
-        "Behold! A {subject} so {adjective} the gods themselves do tremble!",
+        "Behold! {A} {subject} so {adjective} the gods themselves do tremble!",
         "Eternity itself doth envy thy {adjective} {subject}.",
         "When empires fall, thy {adjective} {subject} shall remain."
       ),
@@ -459,4 +459,53 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
     paste0(", ", sample(suffixes, 1), "\\1"),
     text
   )
+}
+
+# ---- Indefinite articles ---------------------------------------------------
+# Templates write {a} (or {A} at the start of a sentence) instead of a literal
+# "a", because the word that follows is drawn at random: "Few people have a
+# energy as creative as yours." was reachable from several templates.
+
+# Pick "a" or "an" for the word that follows. The banks are a closed,
+# hand-written vocabulary and every vowel-initial entry in it takes "an" while
+# every h-initial entry takes "a", so the spelling rule is exact today. The two
+# guards below are unreachable with the current banks and are here so that
+# adding, say, "unicorn habit" or "hour" later does not silently regress.
+indefinite_article <- function(word) {
+  w <- tolower(word)
+  # Spelled with a vowel, pronounced with a consonant: a unicorn, a eulogy,
+  # a one-liner, a once-in-a-lifetime.
+  if (grepl("^(uni[^aeiou]|u[ks]e|ubiq|util|eu|one[^aeiou]|once)", w)) {
+    return("a")
+  }
+  # Silent h: an hour, an honest effort, an heir.
+  if (grepl("^(hour|honest|hono[u]?r|heir)", w)) {
+    return("an")
+  }
+  if (grepl("^[aeiou]", w)) "an" else "a"
+}
+
+# Replace every {a}/{A} with the article the following word takes. Runs after
+# the adjective, the subject and any profanity intensifier are all in place,
+# because the intensifier is inserted directly after the article in templates
+# like "O, what {a} {adjective} {subject}".
+apply_articles <- function(text) {
+  hits <- gregexpr("\\{[aA]\\} *[^ ]+", text, perl = TRUE)
+  regmatches(text, hits) <- lapply(regmatches(text, hits), function(found) {
+    vapply(
+      found,
+      function(one) {
+        capital <- substr(one, 2, 2) == "A"
+        rest <- sub("^\\{[aA]\\} *", "", one)
+        article <- indefinite_article(rest)
+        if (capital) {
+          article <- paste0(toupper(substr(article, 1, 1)), substring(article, 2))
+        }
+        paste(article, rest)
+      },
+      character(1),
+      USE.NAMES = FALSE
+    )
+  })
+  text
 }
