@@ -1,14 +1,18 @@
 # Open items
 
-For Amelia to decide:
+For Amelia to decide. The 57 findings behind most of these are in `_scratch/combo-review.md` (gitignored, 2026-10-31), with real generated sentences and per-1,000 rates. Its replacement words are suggestions, not checked against the banks.
 
-- Should agent commits in this repository carry AI attribution (a `Co-Authored-By:` trailer and a PR footer)? There is no `.agents/project-profile.md` recording the answer, so commits leave it out until you say. Should a profile be created to hold it?
-- The repository has no `.gitattributes`, and the machine has `core.autocrlf=true`, so the working tree is CRLF and snapshot files can differ between checkouts. Add the standard file as its own commit, on a clean tree, with `git add --renormalize .`?
-- The repository has no `air.toml` and has not been Air-formatted. Add one and run Air as its own commit?
-- `NEWS.md` still has an older em dash, in the bullet where `profanity` gains five levels. Replace it? It was left alone because it predates the review that found the newer one; `dev-history.md` also has em dashes, and those record history.
-- The other tests call `set.seed()` directly, leaking RNG state between tests. Only the article test was moved to `withr::local_seed()`. Convert the rest?
-- The existing bizarre adjective "barely legal" has an adult-content association that sits badly with the package's kind tone. Replace it?
-- Existing mass nouns read awkwardly after "a": kindness, creativity and energy ("Few people have a kindness as ..."), and attendance, small talk and work ("that is a remarkably adequate small talk"). Generated output now also gives "a remarkably onerous small talk". Replace them, or fix the templates that put "a" before a subject?
-- Existing multi-word adjectives such as "surprisingly decent" and "not entirely terrible" read oddly after "remarkably" ("a remarkably not entirely terrible ..."). Replace them, or stop using "remarkably" with that bank?
+- Replace "barely legal" in the modern bizarre adjectives? It carries a sexual connotation at the clean default and also gives "barely legal and illegal in three states". Suggestions: "legally distinct", "legally ambiguous", "technically permitted".
+- Mass nouns after "a": replace the words, or stop those templates putting "a" before a subject? Sincere: kindness, creativity, curiosity, judgment, energy (together about 130 of every 1,000 plain `compliment()` calls). Grumpy: attendance, small talk, work, meeting behavior. Quirky, by blending: playlist curation, group chat etiquette. Shakespearean cheerful: merriment, laughter, revelry. Shakespearean sincere: constancy.
+- "remarkably" with adjectives that already carry an adverb ("a remarkably not entirely terrible attendance"): drop "remarkably" from the sincere and grumpy templates and use `{a}`, or keep it for one-word adjectives only?
+- Keep `onerous` and `uninspired`? You asked for them. The combo review finds they are the only grumpy adjectives with no praise in them, so templates like "almost makes up for everything else" contradict themselves. Together they are about 164 of every 1,000 grumpy calls. Options: keep, replace (suggested "unobjectionable", "serviceable"), or keep and rewrite those templates.
+- Stutters: widen the check in `build_one()` to compare every word on a shorter prefix? It would catch glorious glory, merry merriment, eternal + Eternity, passable + passing, surprisingly decent + "surprising how", wonderful + sense of wonder, mildly prophetic + ankle prophecy, chaotic-good + "the good kind of". Untested: a shorter prefix may also block harmless pairs, so check it against the banks first. energy, hug energy and elbow energy with "main-character energy" and "radiates ... energy" need a separate choice of words or templates.
+- Rewrite these templates? "nothing short of" lands on mild adjectives ("nothing short of steadfast"). Shakespearean "is tolerable" repeats adequate, passable and sufferable. "a festival unto mine eyes" meets sound subjects such as roundelay.
+- Accidental insult in the sincere bank: "creative moral compass" and "creative work ethic". Keep `creative` away from those subjects, or drop it?
+- `dance move` reads oddly in the singular (about 85 of every 1,000 cheerful calls). Replace it?
+- Shakespearean vocabulary: change `labor` to `labour`, and `cosmicall` and `shadowe` to real words ("celestial", "shade")?
+- Profanity: ", as heck" usually lands after a noun (about 1 in 6 mild outputs); move it to the intensifier path or drop it? Should an intensifier go before the last word of a multi-word adjective rather than the first ("your damn borderline impressive excuse")? Give Shakespearean its own intensifiers and suffixes, so "thy" and "you" stop colliding?
+- Combo review findings marked keep or low priority still need your yes: glory, energy, raccoons in Shakespearean, ether-signal, thunderous, sunny + "ray of sunshine", unconquerable, radiant, -ly adjectives after "officially".
+- Templates use a double hyphen (`--`) in places. Noticed, not reviewed. Keep it?
 - The expanded word lists were chosen by an agent and no person has read them. Do you want to review them before they ship?
-- Re-rendering `README.Rmd` adds a blank line between the badge comments, which was removed by hand in the word-list commit and will come back on the next render. Leave it, or accept the blank line?
+- `dev-history.md` has em dashes, kept because it records history. Replace them too?
