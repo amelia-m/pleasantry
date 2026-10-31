@@ -595,7 +595,10 @@ apply_articles <- function(text) {
         rest <- sub("^\\{[aA]\\} *", "", one)
         article <- indefinite_article(rest)
         if (capital) {
-          article <- paste0(toupper(substr(article, 1, 1)), substring(article, 2))
+          article <- paste0(
+            toupper(substr(article, 1, 1)),
+            substring(article, 2)
+          )
         }
         paste(article, rest)
       },
