@@ -42,27 +42,25 @@ test_that("weirdness = 0.5 always draws every component from the quirky pool", {
 })
 
 test_that("intermediate weirdness blends the two adjacent tiers", {
-  set.seed(4812)
-  low <- compliment(40, weirdness = 0.25)
+  low <- withr::with_seed(4812, compliment(40, weirdness = 0.25))
   expect_true(any(grepl("brilliant|creative|thoughtful", low)))
   expect_true(any(grepl("meticulous|underrated|playlist", low)))
   expect_false(any(grepl("raccoon|eldritch|cosmic", low)))
 
-  set.seed(4812)
-  high <- compliment(40, weirdness = 0.75)
+  high <- withr::with_seed(4812, compliment(40, weirdness = 0.75))
   expect_true(any(grepl("raccoon|eldritch|cosmic", high)))
   expect_true(any(grepl("meticulous|underrated|playlist", high)))
   expect_false(any(grepl("brilliant|creative|thoughtful", high)))
 })
 
 test_that("adjectives already present in a template are not duplicated", {
-  set.seed(9021)
+  withr::local_seed(9021)
   result <- compliment(50)
   expect_false(any(grepl("inspiring.*inspiring", result)))
 })
 
 test_that("mood = \"grumpy\" produces backhanded compliments", {
-  set.seed(3692)
+  withr::local_seed(3692)
   result <- compliment(20, mood = "grumpy")
   expect_true(any(grepl(
     "considering|I'll give you that|least of your problems",
@@ -72,20 +70,20 @@ test_that("mood = \"grumpy\" produces backhanded compliments", {
 })
 
 test_that("shakespearean = TRUE produces pseudo-Shakespearean language", {
-  set.seed(7531)
+  withr::local_seed(7531)
   result <- compliment(20, shakespearean = TRUE)
   expect_true(any(grepl("thy|thou|thee|doth|prithee", result)))
   expect_false(any(grepl("raccoon|NASA|spreadsheet", result)))
 })
 
 test_that("profanity adds intensifiers or trailing clauses", {
-  set.seed(8642)
+  withr::local_seed(8642)
   result <- compliment(20, profanity = "strong")
   expect_true(any(grepl("fucking|goddamn|bastard|bullshit", result)))
 })
 
 test_that("subjects are singular to agree with template verbs", {
-  set.seed(5150)
+  withr::local_seed(5150)
   result <- c(
     compliment(100, mood = "grumpy"),
     compliment(100, mood = "cheerful"),
@@ -99,14 +97,14 @@ test_that("subjects are singular to agree with template verbs", {
 })
 
 test_that("profanity = \"tame\" uses funny clean words", {
-  set.seed(6789)
+  withr::local_seed(6789)
   result <- compliment(20, profanity = "tame")
   expect_true(any(grepl("fudging|flipping|biscuit|bullhonky|fudge", result)))
   expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
 })
 
 test_that("profanity = \"weird\" uses the extra-weird set", {
-  set.seed(6789)
+  withr::local_seed(6789)
   result <- compliment(20, profanity = "weird")
   weird_words <- "blorping|squidging|walrus|gravy|googly|wombat"
   expect_true(any(grepl(weird_words, result)))

@@ -5,16 +5,13 @@ test_that("farewell() returns n farewells", {
 })
 
 test_that("farewell() moods produce distinct tones", {
-  set.seed(2468)
-  expect_true(any(grepl(
-    "knave|Begone|Get thee gone",
+  grumpy <- withr::with_seed(
+    2468,
     farewell(20, mood = "grumpy", shakespearean = TRUE)
-  )))
-  set.seed(2468)
-  expect_true(any(grepl(
-    "sparkle|waving|wonderful",
-    farewell(20, mood = "cheerful")
-  )))
+  )
+  expect_true(any(grepl("knave|Begone|Get thee gone", grumpy)))
+  cheerful <- withr::with_seed(2468, farewell(20, mood = "cheerful"))
+  expect_true(any(grepl("sparkle|waving|wonderful", cheerful)))
 })
 
 test_that("farewell() errors for invalid arguments", {
@@ -25,20 +22,20 @@ test_that("farewell() errors for invalid arguments", {
 })
 
 test_that("farewell() adds profanity when requested", {
-  set.seed(1357)
+  withr::local_seed(1357)
   result <- farewell(20, profanity = "strong")
   expect_true(any(grepl("fucking|goddamn|bastard|bullshit", result)))
 })
 
 test_that("farewell() profanity = \"tame\" uses funny clean words", {
-  set.seed(1357)
+  withr::local_seed(1357)
   result <- farewell(20, profanity = "tame")
   expect_true(any(grepl("fudging|flipping|biscuit|bullhonky|fudge", result)))
   expect_false(any(grepl("fucking|goddamn|bastard|bullshit", result)))
 })
 
 test_that("farewell() profanity = \"weird\" uses the extra-weird set", {
-  set.seed(1357)
+  withr::local_seed(1357)
   result <- farewell(20, profanity = "weird")
   weird_words <- "blorping|squidging|walrus|gravy|googly|wombat"
   expect_true(any(grepl(weird_words, result)))
