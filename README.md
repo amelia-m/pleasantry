@@ -29,11 +29,11 @@ library(pleasantry)
 
 set.seed(101)
 compliment()
-#> [1] "Your resilient spirit is truly inspiring."
+#> [1] "Your uplifting mind is truly inspiring."
 compliment(3)
-#> [1] "Few people have a work ethic as generous as yours."
-#> [2] "Your thoughtful sense of humor is truly inspiring."
-#> [3] "Your mind is nothing short of inspiring."
+#> [1] "Few people have a work ethic as steadfast as yours."
+#> [2] "People admire your radiant work ethic."             
+#> [3] "You have a remarkably uplifting sense of wonder."
 ```
 
 ### Weirdness
@@ -47,7 +47,7 @@ set.seed(202)
 compliment(weirdness = 0.5)
 #> [1] "Your aggressively pleasant email sign-off could headline a very small festival."
 compliment(weirdness = 1)
-#> [1] "Your belly button lint hums with a frequency only vaguely sentient whales can hear."
+#> [1] "Your belly button lint hums with a frequency only suspiciously glowing whales can hear."
 ```
 
 ### Mood
@@ -58,9 +58,9 @@ The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"`
 ``` r
 set.seed(303)
 compliment(mood = "grumpy")
-#> [1] "Your passable work is the least of your problems. In a good way."
+#> [1] "Your passable parking job is the least of your problems. In a good way."
 compliment(mood = "dramatic")
-#> [1] "Your towering triumph will echo through eternity."
+#> [1] "Your immortal legacy will echo through eternity."
 ```
 
 ### Profanity and Shakespearean styling
@@ -78,13 +78,13 @@ source.
 ``` r
 set.seed(404)
 compliment(mood = "grumpy", profanity = "tame")
-#> [1] "Your passable excuse almost makes up for everything else, you magnificent son of a biscuit."
+#> [1] "Your uninspired coffee order almost makes up for everything else, you magnificent son of a biscuit."
 compliment(mood = "grumpy", profanity = "weird")
-#> [1] "Your adequate small talk is the least of your problems. In a good way, you magnificent space walrus."
+#> [1] "Your onerous small talk is the least of your problems. In a good way, you magnificent space walrus."
 compliment(mood = "dramatic", shakespearean = TRUE)
-#> [1] "Thy immortal deed shall outlive the very stars!"
+#> [1] "Thy dread deed shall outlive the very stars!"
 compliment(mood = "grumpy", shakespearean = TRUE, weirdness = 1)
-#> [1] "Forsooth, thy shadowe hums with eldritch energies unknown to natural philosophy."
+#> [1] "Forsooth, thy shadowe hums with moon-touched energies unknown to natural philosophy."
 ```
 
 ## Farewells

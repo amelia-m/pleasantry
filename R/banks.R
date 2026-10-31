@@ -14,13 +14,18 @@ compliment_banks <- function(mood, shakespearean) {
         "brilliant",
         "creative",
         "thoughtful",
-        "remarkable",
+        "wonderful",
         "inspiring",
         "generous",
         "resilient",
         "insightful",
         "radiant",
-        "impressive"
+        "impressive",
+        "steadfast",
+        "gracious",
+        "perceptive",
+        "courageous",
+        "uplifting"
       ),
       subjects = c(
         "mind",
@@ -32,7 +37,12 @@ compliment_banks <- function(mood, shakespearean) {
         "perspective",
         "creativity",
         "energy",
-        "spirit"
+        "spirit",
+        "moral compass",
+        "listening ear",
+        "judgment",
+        "outlook",
+        "sense of wonder"
       )
     ),
     grumpy = list(
@@ -51,7 +61,11 @@ compliment_banks <- function(mood, shakespearean) {
         "competent-ish",
         "borderline impressive",
         "mildly acceptable",
-        "not entirely terrible"
+        "not entirely terrible",
+        "onerous",
+        "uninspired",
+        "forgivable",
+        "survivable"
       ),
       subjects = c(
         "effort",
@@ -61,7 +75,11 @@ compliment_banks <- function(mood, shakespearean) {
         "typing speed",
         "meeting behavior",
         "small talk",
-        "work"
+        "work",
+        "parking job",
+        "signature",
+        "coffee order",
+        "reply-all"
       )
     ),
     cheerful = list(
@@ -80,7 +98,11 @@ compliment_banks <- function(mood, shakespearean) {
         "joyful",
         "infectious",
         "peppy",
-        "luminous"
+        "luminous",
+        "gleeful",
+        "effervescent",
+        "exuberant",
+        "twinkly"
       ),
       subjects = c(
         "laugh",
@@ -90,7 +112,11 @@ compliment_banks <- function(mood, shakespearean) {
         "giggle",
         "high-five game",
         "hug energy",
-        "dance move"
+        "dance move",
+        "wave",
+        "happy dance",
+        "pep talk",
+        "good-morning voice"
       )
     ),
     dramatic = list(
@@ -109,7 +135,11 @@ compliment_banks <- function(mood, shakespearean) {
         "glorious",
         "epic",
         "sovereign",
-        "mythic"
+        "mythic",
+        "fabled",
+        "unconquerable",
+        "titanic",
+        "transcendent"
       ),
       subjects = c(
         "legacy",
@@ -119,7 +149,11 @@ compliment_banks <- function(mood, shakespearean) {
         "glory",
         "reign",
         "ballad",
-        "empire"
+        "empire",
+        "prophecy",
+        "odyssey",
+        "dynasty",
+        "conquest"
       )
     ),
     quirky = list(
@@ -141,7 +175,12 @@ compliment_banks <- function(mood, shakespearean) {
         "well-seasoned",
         "aggressively pleasant",
         "underrated",
-        "award-worthy"
+        "award-worthy",
+        "bespoke",
+        "artisanal",
+        "overqualified",
+        "tournament-grade",
+        "suspiciously competent"
       ),
       subjects = c(
         "spreadsheet habit",
@@ -153,7 +192,12 @@ compliment_banks <- function(mood, shakespearean) {
         "plant collection",
         "mug collection",
         "parking skill",
-        "group chat etiquette"
+        "group chat etiquette",
+        "label-maker technique",
+        "karaoke setlist",
+        "browser tab strategy",
+        "voicemail greeting",
+        "sourdough schedule"
       )
     ),
     bizarre = list(
@@ -186,7 +230,15 @@ compliment_banks <- function(mood, shakespearean) {
         "tectonically unstable",
         "vaguely sentient",
         "chronologically confused",
-        "spiritually caffeinated"
+        "spiritually caffeinated",
+        "ectoplasmic",
+        "gelatinous",
+        "lightly cursed",
+        "non-euclidean",
+        "mildly prophetic",
+        "moon-adjacent",
+        "ancestrally sticky",
+        "municipally unrecognized"
       ),
       subjects = c(
         "aura",
@@ -203,7 +255,15 @@ compliment_banks <- function(mood, shakespearean) {
         "aura's aura",
         "third eye's wifi bar",
         "kneecap wisdom",
-        "haircut's magnetic field"
+        "haircut's magnetic field",
+        "basement portal",
+        "ankle prophecy",
+        "elbow's weather system",
+        "sock drawer ecosystem",
+        "sneeze tempo",
+        "doorknob charisma",
+        "soup telepathy",
+        "pigeon diplomacy"
       )
     )
   )
@@ -222,7 +282,10 @@ compliment_banks <- function(mood, shakespearean) {
         "sweet",
         "virtuous",
         "fair",
-        "gallant"
+        "gallant",
+        "comely",
+        "peerless",
+        "honest"
       ),
       subjects = c(
         "countenance",
@@ -230,7 +293,10 @@ compliment_banks <- function(mood, shakespearean) {
         "temper",
         "bearing",
         "tongue",
-        "heart"
+        "heart",
+        "grace",
+        "mien",
+        "constancy"
       )
     ),
     grumpy = list(
@@ -246,7 +312,10 @@ compliment_banks <- function(mood, shakespearean) {
         "tolerable",
         "unburdensome",
         "scarce-offensive",
-        "adequate"
+        "adequate",
+        "sufferable",
+        "pardonable",
+        "nigh-endurable"
       ),
       subjects = c(
         "jest",
@@ -254,7 +323,10 @@ compliment_banks <- function(mood, shakespearean) {
         "countenance",
         "labor",
         "company",
-        "excuse"
+        "excuse",
+        "bluster",
+        "doublet",
+        "verse"
       )
     ),
     cheerful = list(
@@ -270,7 +342,10 @@ compliment_banks <- function(mood, shakespearean) {
         "blithe",
         "radiant",
         "frolicsome",
-        "gladsome"
+        "gladsome",
+        "sprightly",
+        "mirthful",
+        "winsome"
       ),
       subjects = c(
         "laughter",
@@ -278,7 +353,10 @@ compliment_banks <- function(mood, shakespearean) {
         "spirit",
         "song",
         "caper",
-        "merriment"
+        "merriment",
+        "jig",
+        "revelry",
+        "roundelay"
       )
     ),
     dramatic = list(
@@ -294,7 +372,10 @@ compliment_banks <- function(mood, shakespearean) {
         "exalted",
         "thunderous",
         "sovereign",
-        "eternal"
+        "eternal",
+        "puissant",
+        "undying",
+        "dread"
       ),
       subjects = c(
         "legend",
@@ -302,7 +383,10 @@ compliment_banks <- function(mood, shakespearean) {
         "name",
         "triumph",
         "dominion",
-        "deed"
+        "deed",
+        "sceptre",
+        "crown",
+        "lineage"
       )
     ),
     bizarre = list(
@@ -319,7 +403,10 @@ compliment_banks <- function(mood, shakespearean) {
         "uncanny",
         "spectral",
         "cosmicall",
-        "unholy"
+        "unholy",
+        "bewitched",
+        "moon-touched",
+        "fey"
       ),
       subjects = c(
         "aura",
@@ -327,7 +414,10 @@ compliment_banks <- function(mood, shakespearean) {
         "shadowe",
         "vapour",
         "constellation",
-        "familiar"
+        "familiar",
+        "humour",
+        "homunculus",
+        "astrolabe"
       )
     )
   )
