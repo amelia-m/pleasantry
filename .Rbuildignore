@@ -4,6 +4,8 @@
 ^\.github$
 ^LICENSE\.md$
 ^README\.Rmd$
+^README\.html$
+^TODO\.md$
 ^dev-history\.md$
 ^_pkgdown\.yml$
 ^docs$

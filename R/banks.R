@@ -475,7 +475,13 @@ indefinite_article <- function(word) {
   w <- tolower(word)
   # Spelled with a vowel, pronounced with a consonant: a unicorn, a eulogy,
   # a one-liner, a once-in-a-lifetime.
-  if (grepl("^(uni[^aeiou]|u[ks]e|ubiq|util|eu|one[^aeiou]|once)", w)) {
+  # Named word starts rather than "uni + consonant", which would also catch the
+  # un- words: an uninspired, an unimpressive. \\b keeps "one" off an onerous.
+  sounds_like_y_or_w <- paste0(
+    "^(uni(c|f|lat|on|qu|son|sex|t|v)|us[aeu]|uk|ubiq|ut(il|en|op)|ur(an|in)",
+    "|eu|one\\b|once\\b)"
+  )
+  if (grepl(sounds_like_y_or_w, w, perl = TRUE)) {
     return("a")
   }
   # Silent h: an hour, an honest effort, an heir.

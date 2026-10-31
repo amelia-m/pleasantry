@@ -127,6 +127,13 @@ test_that("indefinite articles agree with the word that follows", {
   # Spelled with a vowel, pronounced with a consonant, and the reverse.
   expect_equal(pleasantry:::indefinite_article("unicorn"), "a")
   expect_equal(pleasantry:::indefinite_article("one-liner"), "a")
+  expect_equal(pleasantry:::indefinite_article("unique"), "a")
+  expect_equal(pleasantry:::indefinite_article("usual"), "a")
+  # The un- words and "onerous" start like those but take "an".
+  expect_equal(pleasantry:::indefinite_article("uninspired"), "an")
+  expect_equal(pleasantry:::indefinite_article("unimpressive"), "an")
+  expect_equal(pleasantry:::indefinite_article("unidentified"), "an")
+  expect_equal(pleasantry:::indefinite_article("onerous"), "an")
   expect_equal(pleasantry:::indefinite_article("hour"), "an")
   expect_equal(pleasantry:::indefinite_article("honest"), "an")
   expect_equal(pleasantry:::indefinite_article("haircut"), "a")
@@ -144,25 +151,32 @@ test_that("indefinite articles agree with the word that follows", {
 })
 
 test_that("generated compliments never mismatch an indefinite article", {
-  set.seed(1)
-  bad <- character()
+  withr::local_seed(1)
+  out <- character()
   for (mood in c("sincere", "grumpy", "cheerful", "dramatic")) {
     for (shakespearean in c(FALSE, TRUE)) {
       for (weirdness in c(0, 0.5, 1)) {
-        for (profanity in c("none", "tame", "weird")) {
-          out <- compliment(
+        for (profanity in c("none", "tame", "mild", "strong", "weird")) {
+          out <- c(out, compliment(
             120,
             weirdness = weirdness, mood = mood,
             profanity = profanity, shakespearean = shakespearean
-          )
-          bad <- c(
-            bad,
-            grep("\\ba (?=[aeiou])|\\ban (?=[^aeiou ])|\\{[aA]\\}",
-                 out, perl = TRUE, value = TRUE)
-          )
+          ))
         }
       }
     }
   }
-  expect_equal(bad, character())
+  expect_equal(grep("\\{[aA]\\}", out, value = TRUE), character())
+
+  # Each article is compared with indefinite_article() rather than a vowel
+  # regex, so "a unicorn" passes and a capitalized "A energy" is caught.
+  pairs <- unlist(regmatches(out, gregexpr("\\b[Aa]n? [^ ]+", out, perl = TRUE)))
+  expect_gt(length(pairs), 0)
+  article <- tolower(sub(" .*", "", pairs))
+  following <- sub("^[^ ]+ ", "", pairs)
+  expected <- vapply(
+    following, pleasantry:::indefinite_article, character(1),
+    USE.NAMES = FALSE
+  )
+  expect_equal(pairs[article != expected], character())
 })

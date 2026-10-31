@@ -121,9 +121,11 @@ Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern
 R workflow (ft. Positron and
 AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on
 Monday, September 14, using Positron Assistant throughout, and built out
-afterwards until the workshop’s allocated AI credits ran out.
+afterwards until the workshop’s allocated AI credits ran out. The rename
+to pleasantry, the move to the repository root and the later rounds of
+defect fixes were done with Claude Code.
 
-The full development conversation is kept on the
+The full development conversation with Positron Assistant is kept on the
 [`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts)
 branch as Markdown, HTML and JSON, so the workflow that produced the
 package is readable alongside the result – design dead ends included:
