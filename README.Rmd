@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-pleasantry generates randomized compliments and farewells, from sincere
-encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
+pleasantry is a toy package that generates randomized compliments and
+farewells, from sincere encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
 Use it to add a bit of positivity (or hostility, or iambic flair) to
 scripts, apps, and console output.
 
