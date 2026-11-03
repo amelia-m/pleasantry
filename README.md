@@ -6,10 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-pleasantry generates randomized compliments and farewells, from sincere
-encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
-Use it to add a bit of positivity (or hostility, or iambic flair) to
-scripts, apps, and console output.
+pleasantry is a toy package that generates randomized compliments and farewells, from sincere encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
+Use it to add a bit of positivity (or hostility, or iambic flair) to scripts, apps, and console output.
 
 ## Installation
 
@@ -38,9 +36,7 @@ compliment(3)
 
 ### Weirdness
 
-The `weirdness` argument moves content along a spectrum from sincere (0)
-through quirky (0.5) to bizarre (1), with adjacent tiers blending at
-intermediate values:
+The `weirdness` argument moves content along a spectrum from sincere (0) through quirky (0.5) to bizarre (1), with adjacent tiers blending at intermediate values:
 
 ``` r
 set.seed(202)
@@ -52,8 +48,7 @@ compliment(weirdness = 1)
 
 ### Mood
 
-The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"`
-(backhanded), `"cheerful"`, or `"dramatic"`:
+The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"` (backhanded), `"cheerful"`, or `"dramatic"`:
 
 ``` r
 set.seed(303)
@@ -65,15 +60,11 @@ compliment(mood = "dramatic")
 
 ### Profanity and Shakespearean styling
 
-`profanity` controls the spice level: `"none"` (default), `"tame"`
-(funny clean words like “fudging” and “oh, fudge-muffins”), `"mild"`
-(e.g. “damn”), `"strong"` (explicit), or `"weird"` (an extra-weird clean
-set like “blorping” and “you magnificent space walrus”).
-`shakespearean = TRUE` switches to pseudo-Shakespearean language. Both
-compose with `mood` and `weirdness`:
+`profanity` controls the spice level: `"none"` (default), `"tame"` (funny clean words like “fudging” and “oh, fudge-muffins”), `"mild"` (e.g. “damn”), `"strong"` (explicit), or `"weird"` (an extra-weird clean set like “blorping” and “you magnificent space walrus”).
+`shakespearean = TRUE` switches to pseudo-Shakespearean language.
+Both compose with `mood` and `weirdness`:
 
-**Note:** the `"strong"` tier ships explicit language in the package
-source.
+**Note:** the `"strong"` tier ships explicit language in the package source.
 
 ``` r
 set.seed(404)
@@ -89,8 +80,7 @@ compliment(mood = "grumpy", shakespearean = TRUE, weirdness = 1)
 
 ## Farewells
 
-`farewell()` generates random goodbyes with the same `mood`,
-`profanity`, and `shakespearean` options:
+`farewell()` generates random goodbyes with the same `mood`, `profanity`, and `shakespearean` options:
 
 ``` r
 set.seed(505)
@@ -104,9 +94,7 @@ farewell(mood = "cheerful", shakespearean = TRUE)
 
 ## Compliment and farewell of the day
 
-`compliment_of_the_day()` and `farewell_of_the_day()` return a single
-result that is deterministic for a given date, without disturbing the
-global RNG state:
+`compliment_of_the_day()` and `farewell_of_the_day()` return a single result that is deterministic for a given date, without disturbing the global RNG state:
 
 ``` r
 compliment_of_the_day("2026-01-01")
@@ -117,20 +105,9 @@ farewell_of_the_day("2026-01-01", mood = "grumpy")
 
 ## How this was built
 
-Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern
-R workflow (ft. Positron and
-AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on
-Monday, September 14, using Positron Assistant throughout, and built out
-afterwards until the workshop’s allocated AI credits ran out.
+Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern R workflow (ft. Positron and AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on Monday, September 14, using Positron Assistant throughout, and built out afterwards until the workshop’s allocated AI credits ran out.
 
-The full development conversation is kept on the
-[`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts)
-branch as Markdown, HTML and JSON, so the workflow that produced the
-package is readable alongside the result – design dead ends included:
-the `weirdness` argument went through four designs before the three-tier
-version, and a late refactor collapsed two redundant arguments into the
-single five-level `profanity`. A much shorter summary is in
-`dev-history.md`.
+The full development conversation is kept on the [`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts) branch as Markdown, HTML and JSON, so the workflow that produced the package is readable alongside the result – design dead ends included: the `weirdness` argument went through four designs before the three-tier version, and a late refactor collapsed two redundant arguments into the single five-level `profanity`.
+A much shorter summary is in `dev-history.md`.
 
-It lives on its own branch because it is 15 MB against a 12 KB package,
-and installing from GitHub fetches a snapshot of the default branch.
+It lives on its own branch because it is 15 MB against a 12 KB package, and installing from GitHub fetches a snapshot of the default branch.
