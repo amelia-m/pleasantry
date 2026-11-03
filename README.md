@@ -30,11 +30,11 @@ library(pleasantry)
 
 set.seed(101)
 compliment()
-#> [1] "Your uplifting mind is truly inspiring."
+#> [1] "You have a remarkably resilient spirit."
 compliment(3)
-#> [1] "Few people have a work ethic as steadfast as yours."
-#> [2] "People admire your radiant work ethic."             
-#> [3] "You have a remarkably uplifting sense of wonder."
+#> [1] "Few people have a work ethic as generous as yours."
+#> [2] "Your sense of humor is nothing short of inspiring."
+#> [3] "Few people have a mind as inspiring as yours."
 ```
 
 ### Weirdness
@@ -59,9 +59,9 @@ The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"`
 ``` r
 set.seed(303)
 compliment(mood = "grumpy")
-#> [1] "Your passable parking job is the least of your problems. In a good way."
+#> [1] "Nobody asked for your uninspired parking job, and yet."
 compliment(mood = "dramatic")
-#> [1] "Your immortal legacy will echo through eternity."
+#> [1] "The heavens themselves weep at your transcendent legacy."
 ```
 
 ### Profanity and Shakespearean styling
@@ -79,13 +79,13 @@ source.
 ``` r
 set.seed(404)
 compliment(mood = "grumpy", profanity = "tame")
-#> [1] "Your uninspired coffee order almost makes up for everything else, you magnificent son of a biscuit."
+#> [1] "It's honestly surprising how flipping not entirely terrible your reply-all is, considering."
 compliment(mood = "grumpy", profanity = "weird")
-#> [1] "Your onerous small talk is the least of your problems. In a good way, you magnificent space walrus."
+#> [1] "It's honestly surprising how heckity-heck adequate your parking job is, considering."
 compliment(mood = "dramatic", shakespearean = TRUE)
-#> [1] "Thy dread deed shall outlive the very stars!"
+#> [1] "Behold! A name so undying the gods themselves do tremble!"
 compliment(mood = "grumpy", shakespearean = TRUE, weirdness = 1)
-#> [1] "Forsooth, thy shadowe hums with moon-touched energies unknown to natural philosophy."
+#> [1] "Alchemy cannot explain thy fey aura."
 ```
 
 ## Farewells
@@ -111,7 +111,7 @@ global RNG state:
 
 ``` r
 compliment_of_the_day("2026-01-01")
-#> [1] "You have a remarkably insightful perspective."
+#> [1] "Few people have a judgment as wonderful as yours."
 farewell_of_the_day("2026-01-01", mood = "grumpy")
 #> [1] "Off you go. Don't make it weird."
 ```

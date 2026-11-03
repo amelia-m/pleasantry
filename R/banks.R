@@ -7,12 +7,11 @@ compliment_banks <- function(mood, shakespearean) {
         "Your {adjective} {subject} is truly inspiring.",
         "You have a remarkably {adjective} {subject}.",
         "People admire your {adjective} {subject}.",
-        "Your {subject} is nothing short of {adjective}.",
         "Few people have {a} {subject} as {adjective} as yours."
       ),
       adjectives = c(
         "brilliant",
-        "creative",
+        "admirable",
         "thoughtful",
         "wonderful",
         "inspiring",
@@ -43,6 +42,19 @@ compliment_banks <- function(mood, shakespearean) {
         "judgment",
         "outlook",
         "sense of wonder"
+      ),
+      groups = list(
+        # "Nothing short of" sets up a peak, so it only takes the big words.
+        list(
+          templates = "Your {subject} is nothing short of {adjective}.",
+          adjectives = c(
+            "brilliant",
+            "wonderful",
+            "inspiring",
+            "impressive",
+            "radiant"
+          )
+        )
       )
     ),
     grumpy = list(
@@ -62,8 +74,6 @@ compliment_banks <- function(mood, shakespearean) {
         "borderline impressive",
         "mildly acceptable",
         "not entirely terrible",
-        "onerous",
-        "uninspired",
         "forgivable",
         "survivable"
       ),
@@ -80,6 +90,24 @@ compliment_banks <- function(mood, shakespearean) {
         "signature",
         "coffee order",
         "reply-all"
+      ),
+      groups = list(
+        # Plain insults with no praise in them, which would contradict the
+        # backhanded templates above.
+        list(
+          templates = c(
+            "Nobody asked for your {adjective} {subject}, and yet.",
+            "Your {subject} is {adjective}, and I have filed a complaint."
+          ),
+          adjectives = c(
+            "onerous",
+            "uninspired",
+            "lackluster",
+            "underwhelming",
+            "joyless",
+            "tiresome"
+          )
+        )
       )
     ),
     cheerful = list(
@@ -301,7 +329,7 @@ compliment_banks <- function(mood, shakespearean) {
     ),
     grumpy = list(
       templates = c(
-        "Thy {adjective} {subject} is tolerable, I grant thee that much.",
+        "Thy {adjective} {subject} is no great offence, I grant thee that much.",
         "For a knave, thy {subject} is passing {adjective}.",
         "Marry, thy {adjective} {subject} doth exceed my lowest expectations.",
         "Thy {subject} is {adjective} -- by thy standards, at least."
@@ -333,7 +361,7 @@ compliment_banks <- function(mood, shakespearean) {
       templates = c(
         "Huzzah! Thy {adjective} {subject} maketh the lark itself rejoice!",
         "O joy! O rapture! What {a} {adjective} {subject} thou hast!",
-        "Thy {adjective} {subject} is a festival unto mine eyes!",
+        "Thy {adjective} {subject} is a festival unto mine senses!",
         "Zounds, thy {subject} is {adjective} beyond all measure!"
       ),
       adjectives = c(
@@ -549,6 +577,21 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
     paste0(", ", sample(suffixes, 1), "\\1"),
     text
   )
+}
+
+# ---- Repeated words --------------------------------------------------------
+# Two pieces of a sentence clash when any of their words share their first four
+# letters: "glorious glory", "merry merriment", "passable" in "passing
+# {adjective}". Comparing word by word reaches the second word of "sense of
+# wonder"; five letters would miss glory and merriment.
+
+word_stems <- function(text) {
+  words <- unlist(strsplit(tolower(gsub("\\{[^}]*\\}", " ", text)), "[^a-z]+"))
+  unique(substr(words[nchar(words) >= 4], 1, 4))
+}
+
+stems_clash <- function(x, y) {
+  length(intersect(word_stems(x), word_stems(y))) > 0
 }
 
 # ---- Indefinite articles ---------------------------------------------------

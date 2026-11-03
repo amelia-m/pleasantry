@@ -31,32 +31,86 @@ test_that("weirdness = 0 always draws every component from the classic pool", {
 
 test_that("weirdness = 1 always draws every component from the bizarre pool", {
   result <- compliment(20, weirdness = 1)
-  other_tiers <- "brilliant|creative|meticulous|underrated|playlist"
+  other_tiers <- "brilliant|admirable|meticulous|underrated|playlist"
   expect_false(any(grepl(other_tiers, result)))
 })
 
 test_that("weirdness = 0.5 always draws every component from the quirky pool", {
   result <- compliment(20, weirdness = 0.5)
-  other_tiers <- "brilliant|creative|raccoon|eldritch|cosmic"
+  other_tiers <- "brilliant|admirable|raccoon|eldritch|cosmic"
   expect_false(any(grepl(other_tiers, result)))
 })
 
 test_that("intermediate weirdness blends the two adjacent tiers", {
   low <- withr::with_seed(4812, compliment(40, weirdness = 0.25))
-  expect_true(any(grepl("brilliant|creative|thoughtful", low)))
+  expect_true(any(grepl("brilliant|admirable|thoughtful", low)))
   expect_true(any(grepl("meticulous|underrated|playlist", low)))
   expect_false(any(grepl("raccoon|eldritch|cosmic", low)))
 
   high <- withr::with_seed(4812, compliment(40, weirdness = 0.75))
   expect_true(any(grepl("raccoon|eldritch|cosmic", high)))
   expect_true(any(grepl("meticulous|underrated|playlist", high)))
-  expect_false(any(grepl("brilliant|creative|thoughtful", high)))
+  expect_false(any(grepl("brilliant|admirable|thoughtful", high)))
 })
 
 test_that("adjectives already present in a template are not duplicated", {
   withr::local_seed(9021)
   result <- compliment(50)
   expect_false(any(grepl("inspiring.*inspiring", result)))
+})
+
+test_that("stems_clash() compares every word on four letters", {
+  expect_true(pleasantry:::stems_clash("glorious", "glory"))
+  expect_true(pleasantry:::stems_clash("wonderful", "sense of wonder"))
+  expect_true(pleasantry:::stems_clash("mildly prophetic", "ankle prophecy"))
+  expect_true(pleasantry:::stems_clash(
+    "passable",
+    "thy {subject} is passing {adjective}."
+  ))
+  expect_false(pleasantry:::stems_clash("brilliant", "mind"))
+  # The placeholders are not words: every template holds them.
+  expect_false(pleasantry:::stems_clash("adjective", "{adjective} {subject}"))
+})
+
+test_that("compliment() avoids repeated words in all three slots", {
+  bank <- list(
+    templates = c(
+      "Your {adjective} {subject} echoes.",
+      "Plain {adjective} {subject}."
+    ),
+    adjectives = c("glorious", "echoing", "plain", "steady"),
+    subjects = c("glory", "echo", "plainness", "hat")
+  )
+  local_mocked_bindings(
+    compliment_banks = \(mood, shakespearean) {
+      list(tiers = list(mood = bank), positions = c(mood = 0), bandwidth = 1)
+    }
+  )
+  withr::local_seed(4)
+  result <- compliment(200)
+  expect_false(any(grepl("glorious glory", result)))
+  expect_false(any(grepl("echoing .*echoes|echo echoes", result)))
+  expect_false(any(grepl("Plain .*plain", result)))
+})
+
+test_that("group adjectives only appear in their group's templates", {
+  withr::local_seed(2718)
+  grumpy <- c(
+    compliment(300, mood = "grumpy"),
+    compliment(300, mood = "grumpy", weirdness = 0.25)
+  )
+  blunt_words <- "onerous|uninspired|lackluster|underwhelming|joyless|tiresome"
+  blunt_templates <- "Nobody asked for|filed a complaint"
+  expect_identical(grepl(blunt_words, grumpy), grepl(blunt_templates, grumpy))
+  expect_true(any(grepl(blunt_words, grumpy)))
+
+  sincere <- compliment(300)
+  strong <- sincere[grepl("nothing short of", sincere)]
+  expect_gt(length(strong), 0)
+  expect_match(
+    strong,
+    "of (brilliant|wonderful|inspiring|impressive|radiant)\\.$"
+  )
 })
 
 test_that("mood = \"grumpy\" produces backhanded compliments", {
