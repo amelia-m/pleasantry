@@ -16,7 +16,9 @@
 #'   tiers. When `shakespearean = TRUE`, the quirky tier is omitted and
 #'   `weirdness` blends linearly between the mood's Shakespearean bank and
 #'   a bizarre Shakespearean bank. A few templates only take adjectives
-#'   chosen for them, such as the plainer insults in the `"grumpy"` mood.
+#'   chosen for them, such as the plainer insults in the `"grumpy"` mood;
+#'   their adjective then comes from the template's own tier rather than
+#'   being drawn independently.
 #' @param mood The tone of the compliment: `"sincere"` (default),
 #'   `"grumpy"` (backhanded compliments), `"cheerful"` (over-the-top
 #'   warmth), or `"dramatic"` (epic, life-or-death stakes).

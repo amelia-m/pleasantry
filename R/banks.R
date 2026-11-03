@@ -361,7 +361,7 @@ compliment_banks <- function(mood, shakespearean) {
       templates = c(
         "Huzzah! Thy {adjective} {subject} maketh the lark itself rejoice!",
         "O joy! O rapture! What {a} {adjective} {subject} thou hast!",
-        "Thy {adjective} {subject} is a festival unto mine senses!",
+        "Thy {adjective} {subject} is a festival unto my senses!",
         "Zounds, thy {subject} is {adjective} beyond all measure!"
       ),
       adjectives = c(
@@ -600,10 +600,10 @@ stems_clash <- function(x, y) {
 # energy as creative as yours." was reachable from several templates.
 
 # Pick "a" or "an" for the word that follows. The banks are a closed,
-# hand-written vocabulary and every vowel-initial entry in it takes "an" while
-# every h-initial entry takes "a", so the spelling rule is exact today. The two
-# guards below are unreachable with the current banks and are here so that
-# adding, say, "unicorn habit" or "hour" later does not silently regress.
+# hand-written vocabulary. The silent-h guard is live (the Shakespearean
+# sincere "honest" takes "an"); the y/w guard is unreachable with the current
+# banks and is here so that adding, say, "unicorn habit" later does not
+# silently regress.
 indefinite_article <- function(word) {
   w <- tolower(word)
   # Spelled with a vowel, pronounced with a consonant: a unicorn, a eulogy,

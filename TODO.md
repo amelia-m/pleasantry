@@ -14,3 +14,5 @@ For Amelia to decide. The 57 findings behind most of these are in `_scratch/comb
 - Templates use a double hyphen (`--`) in places. Noticed, not reviewed. Keep it?
 - The expanded word lists were chosen by an agent and no person has read them. Do you want to review them before they ship?
 - `dev-history.md` has em dashes, kept because it records history. Replace them too?
+- `apply_profanity()` puts the intensifier before the first plain-text match of the adjective in the finished sentence. No current adjective appears inside a template or subject it can pair with (checked by the 2026-11-03 branch review), but a new word could, and the stem check does not catch it for adjectives under four letters (`fey`). Insert the intensifier at the `{adjective}` placeholder instead, before the adjective is substituted?
+- Speed: `stems_clash()` recomputes the template's word stems on every redraw, and 20,000 grumpy calls at weirdness 0.25 take about 9 seconds (branch review, 2026-11-03). Compute the template's stems once before the redraw loop?

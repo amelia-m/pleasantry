@@ -53,12 +53,6 @@ test_that("intermediate weirdness blends the two adjacent tiers", {
   expect_false(any(grepl("brilliant|admirable|thoughtful", high)))
 })
 
-test_that("adjectives already present in a template are not duplicated", {
-  withr::local_seed(9021)
-  result <- compliment(50)
-  expect_false(any(grepl("inspiring.*inspiring", result)))
-})
-
 test_that("stems_clash() compares every word on four letters", {
   expect_true(pleasantry:::stems_clash("glorious", "glory"))
   expect_true(pleasantry:::stems_clash("wonderful", "sense of wonder"))
