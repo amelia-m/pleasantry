@@ -87,6 +87,41 @@ test_that("compliment() avoids repeated words in all three slots", {
   expect_false(any(grepl("Plain .*plain", result)))
 })
 
+test_that("compliment() errors instead of hanging when every draw repeats a word", {
+  bank <- list(
+    templates = "Your {adjective} {subject}.",
+    adjectives = "glorious",
+    subjects = "glory"
+  )
+  local_mocked_bindings(
+    compliment_banks = \(mood, shakespearean) {
+      list(tiers = list(mood = bank), positions = c(mood = 0), bandwidth = 1)
+    }
+  )
+  expect_error(compliment(), "avoids repeated words")
+})
+
+test_that("profanity skips words the sentence already has (magnificent bastard)", {
+  withr::local_seed(11)
+  result <- replicate(
+    200,
+    pleasantry:::apply_profanity(
+      "Your magnificent legacy.",
+      "strong",
+      "magnificent"
+    )
+  )
+  expect_false(any(grepl("magnificent bastard", result)))
+  expect_true(any(grepl(", (and I|no)", result)))
+
+  # With every intensifier and suffix ruled out, the sentence is unchanged.
+  taken <- "Fucking goddamn: I mean it, magnificent bastard, no bullshit."
+  expect_identical(
+    pleasantry:::apply_profanity(taken, "strong", "magnificent"),
+    taken
+  )
+})
+
 test_that("group adjectives only appear in their group's templates", {
   withr::local_seed(2718)
   grumpy <- c(

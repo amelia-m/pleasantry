@@ -92,7 +92,16 @@ compliment <- function(
   build_one <- \() {
     group <- pick_group(pick_bank())
     template <- sample(group$templates, 1)
+    tries <- 0
     repeat {
+      # A bank where every draw repeats a word would otherwise never return.
+      tries <- tries + 1
+      if (tries > 100) {
+        cli::cli_abort(
+          "No draw for {.val {template}} avoids repeated words.",
+          .internal = TRUE
+        )
+      }
       # Groups carry no subjects, which is how they differ from a whole bank.
       adjectives <- if (is.null(group$subjects)) {
         group$adjectives

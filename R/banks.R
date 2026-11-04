@@ -564,7 +564,23 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
     )
   )
 
-  if (!is.null(adjective) && sample(c(TRUE, FALSE), 1)) {
+  # Leave out any whose words the sentence already has: "Your magnificent
+  # legacy ..., you magnificent bastard."
+  fits <- \(x) x[!vapply(x, stems_clash, logical(1), text, USE.NAMES = FALSE)]
+  intensifiers <- fits(intensifiers)
+  suffixes <- fits(suffixes)
+  if (
+    length(suffixes) == 0 &&
+      (is.null(adjective) || length(intensifiers) == 0)
+  ) {
+    return(text)
+  }
+
+  if (
+    !is.null(adjective) &&
+      length(intensifiers) > 0 &&
+      (length(suffixes) == 0 || sample(c(TRUE, FALSE), 1))
+  ) {
     return(sub(
       adjective,
       paste(sample(intensifiers, 1), adjective),
