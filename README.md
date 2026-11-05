@@ -104,6 +104,31 @@ farewell_of_the_day("2026-01-01", mood = "grumpy")
 #> [1] "Off you go. Don't make it weird."
 ```
 
+## A compliment every time R starts
+
+R runs your user `.Rprofile` at the start of every session, including a restart.
+`usethis::edit_r_profile()` opens it, creating it if needed; on Windows it is usually in your Documents folder.
+Add:
+
+``` r
+if (interactive() && requireNamespace("pleasantry", quietly = TRUE)) {
+  message(pleasantry::compliment())
+}
+```
+
+`interactive()` keeps the compliment out of `Rscript`, `R CMD check` and knitting, and `requireNamespace()` keeps a missing package from breaking startup.
+Calling `pleasantry::compliment()` without `library()` leaves your search path alone, and `message()` keeps the compliment out of any output you capture.
+
+Swap in `compliment_of_the_day()` for the same compliment all day, or pass any arguments you like, such as `compliment(mood = "grumpy", weirdness = 0.5)`.
+To say goodbye when R closes, add:
+
+``` r
+.Last <- function() if (interactive()) message(pleasantry::farewell())
+```
+
+A project’s own `.Rprofile`, such as the one renv writes, replaces your user one.
+To keep the compliment in such a project, add `source("~/.Rprofile")` at the top of the project’s file.
+
 ## How this was built
 
 Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern R workflow (ft. Positron and AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on Monday, September 14, using Positron Assistant throughout, and built out afterwards until the workshop’s allocated AI credits ran out.
