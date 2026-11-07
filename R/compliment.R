@@ -15,7 +15,10 @@
 #'   bizarre content, and intermediate values blend the two adjacent
 #'   tiers. When `shakespearean = TRUE`, the quirky tier is omitted and
 #'   `weirdness` blends linearly between the mood's Shakespearean bank and
-#'   a bizarre Shakespearean bank.
+#'   a bizarre Shakespearean bank. A few templates only take adjectives
+#'   chosen for them, such as the plainer insults in the `"grumpy"` mood;
+#'   their adjective then comes from the template's own tier rather than
+#'   being drawn independently.
 #' @param mood The tone of the compliment: `"sincere"` (default),
 #'   `"grumpy"` (backhanded compliments), `"cheerful"` (over-the-top
 #'   warmth), or `"dramatic"` (epic, life-or-death stakes).
@@ -78,16 +81,42 @@ compliment <- function(
 
   pick_bank <- \() spec$tiers[[sample(names(spec$tiers), 1, prob = weights)]]
 
+  # A bank's groups hold templates that only take their own adjectives. Every
+  # template is equally likely, whichever group it sits in.
+  pick_group <- \(bank) {
+    groups <- c(list(bank), bank$groups)
+    sizes <- lengths(lapply(groups, `[[`, "templates"))
+    groups[[sample(length(groups), 1, prob = sizes)]]
+  }
+
   build_one <- \() {
-    template <- sample(pick_bank()$templates, 1)
+    group <- pick_group(pick_bank())
+    template <- sample(group$templates, 1)
+    tries <- 0
     repeat {
-      adjective <- sample(pick_bank()$adjectives, 1)
+      # A bank where every draw repeats a word would otherwise never return.
+      tries <- tries + 1
+      if (tries > 100) {
+        cli::cli_abort(
+          "No draw for {.val {template}} avoids repeated words.",
+          .internal = TRUE
+        )
+      }
+      # Groups carry no subjects, which is how they differ from a whole bank.
+      adjectives <- if (is.null(group$subjects)) {
+        group$adjectives
+      } else {
+        pick_bank()$adjectives
+      }
+      adjective <- sample(adjectives, 1)
       subject <- sample(pick_bank()$subjects, 1)
-      # Avoid stem collisions (e.g. "creative" and "creativity") and
-      # adjectives already present in the template (e.g. "inspiring").
-      stem_clash <- substr(adjective, 1, 5) == substr(subject, 1, 5)
-      in_template <- grepl(adjective, template, fixed = TRUE)
-      if (!stem_clash && !in_template) {
+      # Avoid repeated words across the adjective, subject and template (e.g.
+      # "glorious" and "glory", or "inspiring" in "truly inspiring").
+      if (
+        !stems_clash(adjective, subject) &&
+          !stems_clash(adjective, template) &&
+          !stems_clash(subject, template)
+      ) {
         break
       }
     }

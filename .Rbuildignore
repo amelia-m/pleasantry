@@ -2,8 +2,14 @@
 ^\.Rproj\.user$
 ^\.posit$
 ^\.github$
+^\.agents$
+^\.gitattributes$
+^_scratch$
+^air\.toml$
 ^LICENSE\.md$
 ^README\.Rmd$
+^README\.html$
+^TODO\.md$
 ^dev-history\.md$
 ^_pkgdown\.yml$
 ^docs$

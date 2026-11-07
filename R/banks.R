@@ -7,20 +7,24 @@ compliment_banks <- function(mood, shakespearean) {
         "Your {adjective} {subject} is truly inspiring.",
         "You have a remarkably {adjective} {subject}.",
         "People admire your {adjective} {subject}.",
-        "Your {subject} is nothing short of {adjective}.",
         "Few people have {a} {subject} as {adjective} as yours."
       ),
       adjectives = c(
         "brilliant",
-        "creative",
+        "admirable",
         "thoughtful",
-        "remarkable",
+        "wonderful",
         "inspiring",
         "generous",
         "resilient",
         "insightful",
         "radiant",
-        "impressive"
+        "impressive",
+        "steadfast",
+        "gracious",
+        "perceptive",
+        "courageous",
+        "uplifting"
       ),
       subjects = c(
         "mind",
@@ -32,7 +36,25 @@ compliment_banks <- function(mood, shakespearean) {
         "perspective",
         "creativity",
         "energy",
-        "spirit"
+        "spirit",
+        "moral compass",
+        "listening ear",
+        "judgment",
+        "outlook",
+        "sense of wonder"
+      ),
+      groups = list(
+        # "Nothing short of" sets up a peak, so it only takes the big words.
+        list(
+          templates = "Your {subject} is nothing short of {adjective}.",
+          adjectives = c(
+            "brilliant",
+            "wonderful",
+            "inspiring",
+            "impressive",
+            "radiant"
+          )
+        )
       )
     ),
     grumpy = list(
@@ -51,7 +73,9 @@ compliment_banks <- function(mood, shakespearean) {
         "competent-ish",
         "borderline impressive",
         "mildly acceptable",
-        "not entirely terrible"
+        "not entirely terrible",
+        "forgivable",
+        "survivable"
       ),
       subjects = c(
         "effort",
@@ -61,7 +85,29 @@ compliment_banks <- function(mood, shakespearean) {
         "typing speed",
         "meeting behavior",
         "small talk",
-        "work"
+        "work",
+        "parking job",
+        "signature",
+        "coffee order",
+        "reply-all"
+      ),
+      groups = list(
+        # Plain insults with no praise in them, which would contradict the
+        # backhanded templates above.
+        list(
+          templates = c(
+            "Nobody asked for your {adjective} {subject}, and yet.",
+            "Your {subject} is {adjective}, and I have filed a complaint."
+          ),
+          adjectives = c(
+            "onerous",
+            "uninspired",
+            "lackluster",
+            "underwhelming",
+            "joyless",
+            "tiresome"
+          )
+        )
       )
     ),
     cheerful = list(
@@ -80,7 +126,11 @@ compliment_banks <- function(mood, shakespearean) {
         "joyful",
         "infectious",
         "peppy",
-        "luminous"
+        "luminous",
+        "gleeful",
+        "effervescent",
+        "exuberant",
+        "twinkly"
       ),
       subjects = c(
         "laugh",
@@ -90,7 +140,11 @@ compliment_banks <- function(mood, shakespearean) {
         "giggle",
         "high-five game",
         "hug energy",
-        "dance move"
+        "dance move",
+        "wave",
+        "happy dance",
+        "pep talk",
+        "good-morning voice"
       )
     ),
     dramatic = list(
@@ -109,7 +163,11 @@ compliment_banks <- function(mood, shakespearean) {
         "glorious",
         "epic",
         "sovereign",
-        "mythic"
+        "mythic",
+        "fabled",
+        "unconquerable",
+        "titanic",
+        "transcendent"
       ),
       subjects = c(
         "legacy",
@@ -119,7 +177,11 @@ compliment_banks <- function(mood, shakespearean) {
         "glory",
         "reign",
         "ballad",
-        "empire"
+        "empire",
+        "prophecy",
+        "odyssey",
+        "dynasty",
+        "conquest"
       )
     ),
     quirky = list(
@@ -141,7 +203,12 @@ compliment_banks <- function(mood, shakespearean) {
         "well-seasoned",
         "aggressively pleasant",
         "underrated",
-        "award-worthy"
+        "award-worthy",
+        "bespoke",
+        "artisanal",
+        "overqualified",
+        "tournament-grade",
+        "suspiciously competent"
       ),
       subjects = c(
         "spreadsheet habit",
@@ -153,7 +220,12 @@ compliment_banks <- function(mood, shakespearean) {
         "plant collection",
         "mug collection",
         "parking skill",
-        "group chat etiquette"
+        "group chat etiquette",
+        "label-maker technique",
+        "karaoke setlist",
+        "browser tab strategy",
+        "voicemail greeting",
+        "sourdough schedule"
       )
     ),
     bizarre = list(
@@ -186,7 +258,15 @@ compliment_banks <- function(mood, shakespearean) {
         "tectonically unstable",
         "vaguely sentient",
         "chronologically confused",
-        "spiritually caffeinated"
+        "spiritually caffeinated",
+        "ectoplasmic",
+        "gelatinous",
+        "lightly cursed",
+        "non-euclidean",
+        "mildly prophetic",
+        "moon-adjacent",
+        "ancestrally sticky",
+        "municipally unrecognized"
       ),
       subjects = c(
         "aura",
@@ -203,7 +283,15 @@ compliment_banks <- function(mood, shakespearean) {
         "aura's aura",
         "third eye's wifi bar",
         "kneecap wisdom",
-        "haircut's magnetic field"
+        "haircut's magnetic field",
+        "basement portal",
+        "ankle prophecy",
+        "elbow's weather system",
+        "sock drawer ecosystem",
+        "sneeze tempo",
+        "doorknob charisma",
+        "soup telepathy",
+        "pigeon diplomacy"
       )
     )
   )
@@ -222,7 +310,10 @@ compliment_banks <- function(mood, shakespearean) {
         "sweet",
         "virtuous",
         "fair",
-        "gallant"
+        "gallant",
+        "comely",
+        "peerless",
+        "honest"
       ),
       subjects = c(
         "countenance",
@@ -230,12 +321,15 @@ compliment_banks <- function(mood, shakespearean) {
         "temper",
         "bearing",
         "tongue",
-        "heart"
+        "heart",
+        "grace",
+        "mien",
+        "constancy"
       )
     ),
     grumpy = list(
       templates = c(
-        "Thy {adjective} {subject} is tolerable, I grant thee that much.",
+        "Thy {adjective} {subject} is no great offence, I grant thee that much.",
         "For a knave, thy {subject} is passing {adjective}.",
         "Marry, thy {adjective} {subject} doth exceed my lowest expectations.",
         "Thy {subject} is {adjective} -- by thy standards, at least."
@@ -246,7 +340,10 @@ compliment_banks <- function(mood, shakespearean) {
         "tolerable",
         "unburdensome",
         "scarce-offensive",
-        "adequate"
+        "adequate",
+        "sufferable",
+        "pardonable",
+        "nigh-endurable"
       ),
       subjects = c(
         "jest",
@@ -254,14 +351,17 @@ compliment_banks <- function(mood, shakespearean) {
         "countenance",
         "labor",
         "company",
-        "excuse"
+        "excuse",
+        "bluster",
+        "doublet",
+        "verse"
       )
     ),
     cheerful = list(
       templates = c(
         "Huzzah! Thy {adjective} {subject} maketh the lark itself rejoice!",
         "O joy! O rapture! What {a} {adjective} {subject} thou hast!",
-        "Thy {adjective} {subject} is a festival unto mine eyes!",
+        "Thy {adjective} {subject} is a festival unto my senses!",
         "Zounds, thy {subject} is {adjective} beyond all measure!"
       ),
       adjectives = c(
@@ -270,7 +370,10 @@ compliment_banks <- function(mood, shakespearean) {
         "blithe",
         "radiant",
         "frolicsome",
-        "gladsome"
+        "gladsome",
+        "sprightly",
+        "mirthful",
+        "winsome"
       ),
       subjects = c(
         "laughter",
@@ -278,7 +381,10 @@ compliment_banks <- function(mood, shakespearean) {
         "spirit",
         "song",
         "caper",
-        "merriment"
+        "merriment",
+        "jig",
+        "revelry",
+        "roundelay"
       )
     ),
     dramatic = list(
@@ -294,7 +400,10 @@ compliment_banks <- function(mood, shakespearean) {
         "exalted",
         "thunderous",
         "sovereign",
-        "eternal"
+        "eternal",
+        "puissant",
+        "undying",
+        "dread"
       ),
       subjects = c(
         "legend",
@@ -302,7 +411,10 @@ compliment_banks <- function(mood, shakespearean) {
         "name",
         "triumph",
         "dominion",
-        "deed"
+        "deed",
+        "sceptre",
+        "crown",
+        "lineage"
       )
     ),
     bizarre = list(
@@ -319,7 +431,10 @@ compliment_banks <- function(mood, shakespearean) {
         "uncanny",
         "spectral",
         "cosmicall",
-        "unholy"
+        "unholy",
+        "bewitched",
+        "moon-touched",
+        "fey"
       ),
       subjects = c(
         "aura",
@@ -327,7 +442,10 @@ compliment_banks <- function(mood, shakespearean) {
         "shadowe",
         "vapour",
         "constellation",
-        "familiar"
+        "familiar",
+        "humour",
+        "homunculus",
+        "astrolabe"
       )
     )
   )
@@ -446,7 +564,23 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
     )
   )
 
-  if (!is.null(adjective) && sample(c(TRUE, FALSE), 1)) {
+  # Leave out any whose words the sentence already has: "Your magnificent
+  # legacy ..., you magnificent bastard."
+  fits <- \(x) x[!vapply(x, stems_clash, logical(1), text, USE.NAMES = FALSE)]
+  intensifiers <- fits(intensifiers)
+  suffixes <- fits(suffixes)
+  if (
+    length(suffixes) == 0 &&
+      (is.null(adjective) || length(intensifiers) == 0)
+  ) {
+    return(text)
+  }
+
+  if (
+    !is.null(adjective) &&
+      length(intensifiers) > 0 &&
+      (length(suffixes) == 0 || sample(c(TRUE, FALSE), 1))
+  ) {
     return(sub(
       adjective,
       paste(sample(intensifiers, 1), adjective),
@@ -461,21 +595,42 @@ apply_profanity <- function(text, profanity, adjective = NULL) {
   )
 }
 
+# ---- Repeated words --------------------------------------------------------
+# Two pieces of a sentence clash when any of their words share their first four
+# letters: "glorious glory", "merry merriment", "passable" in "passing
+# {adjective}". Comparing word by word reaches the second word of "sense of
+# wonder"; five letters would miss glory and merriment.
+
+word_stems <- function(text) {
+  words <- unlist(strsplit(tolower(gsub("\\{[^}]*\\}", " ", text)), "[^a-z]+"))
+  unique(substr(words[nchar(words) >= 4], 1, 4))
+}
+
+stems_clash <- function(x, y) {
+  length(intersect(word_stems(x), word_stems(y))) > 0
+}
+
 # ---- Indefinite articles ---------------------------------------------------
 # Templates write {a} (or {A} at the start of a sentence) instead of a literal
 # "a", because the word that follows is drawn at random: "Few people have a
 # energy as creative as yours." was reachable from several templates.
 
 # Pick "a" or "an" for the word that follows. The banks are a closed,
-# hand-written vocabulary and every vowel-initial entry in it takes "an" while
-# every h-initial entry takes "a", so the spelling rule is exact today. The two
-# guards below are unreachable with the current banks and are here so that
-# adding, say, "unicorn habit" or "hour" later does not silently regress.
+# hand-written vocabulary. The silent-h guard is live (the Shakespearean
+# sincere "honest" takes "an"); the y/w guard is unreachable with the current
+# banks and is here so that adding, say, "unicorn habit" later does not
+# silently regress.
 indefinite_article <- function(word) {
   w <- tolower(word)
   # Spelled with a vowel, pronounced with a consonant: a unicorn, a eulogy,
   # a one-liner, a once-in-a-lifetime.
-  if (grepl("^(uni[^aeiou]|u[ks]e|ubiq|util|eu|one[^aeiou]|once)", w)) {
+  # Named word starts rather than "uni + consonant", which would also catch the
+  # un- words: an uninspired, an unimpressive. \\b keeps "one" off an onerous.
+  sounds_like_y_or_w <- paste0(
+    "^(uni(c|f|lat|on|qu|son|sex|t|v)|us[aeu]|uk|ubiq|ut(il|en|op)|ur(an|in)",
+    "|eu|one\\b|once\\b)"
+  )
+  if (grepl(sounds_like_y_or_w, w, perl = TRUE)) {
     return("a")
   }
   # Silent h: an hour, an honest effort, an heir.
@@ -499,7 +654,10 @@ apply_articles <- function(text) {
         rest <- sub("^\\{[aA]\\} *", "", one)
         article <- indefinite_article(rest)
         if (capital) {
-          article <- paste0(toupper(substr(article, 1, 1)), substring(article, 2))
+          article <- paste0(
+            toupper(substr(article, 1, 1)),
+            substring(article, 2)
+          )
         }
         paste(article, rest)
       },

@@ -4,3 +4,4 @@ README.html
 # pkgdown writes here on a local build; CI builds it fresh and pushes the
 # result to the gh-pages branch, so it is never committed.
 docs/
+_scratch/

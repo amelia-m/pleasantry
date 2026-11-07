@@ -4,6 +4,7 @@
 # pleasantry
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 pleasantry is a toy package that generates randomized compliments and farewells, from sincere encouragement to backhanded grumbling to pseudo-Shakespearean absurdity.
@@ -27,11 +28,11 @@ library(pleasantry)
 
 set.seed(101)
 compliment()
-#> [1] "Your resilient spirit is truly inspiring."
+#> [1] "You have a remarkably resilient spirit."
 compliment(3)
 #> [1] "Few people have a work ethic as generous as yours."
-#> [2] "Your thoughtful sense of humor is truly inspiring."
-#> [3] "Your mind is nothing short of inspiring."
+#> [2] "Your sense of humor is nothing short of inspiring."
+#> [3] "Few people have a mind as inspiring as yours."
 ```
 
 ### Weirdness
@@ -43,7 +44,7 @@ set.seed(202)
 compliment(weirdness = 0.5)
 #> [1] "Your aggressively pleasant email sign-off could headline a very small festival."
 compliment(weirdness = 1)
-#> [1] "Your belly button lint hums with a frequency only vaguely sentient whales can hear."
+#> [1] "Your belly button lint hums with a frequency only suspiciously glowing whales can hear."
 ```
 
 ### Mood
@@ -53,9 +54,9 @@ The `mood` argument sets the tone: `"sincere"` (default), `"grumpy"` (backhanded
 ``` r
 set.seed(303)
 compliment(mood = "grumpy")
-#> [1] "Your passable work is the least of your problems. In a good way."
+#> [1] "Nobody asked for your uninspired parking job, and yet."
 compliment(mood = "dramatic")
-#> [1] "Your towering triumph will echo through eternity."
+#> [1] "The heavens themselves weep at your transcendent legacy."
 ```
 
 ### Profanity and Shakespearean styling
@@ -69,13 +70,13 @@ Both compose with `mood` and `weirdness`:
 ``` r
 set.seed(404)
 compliment(mood = "grumpy", profanity = "tame")
-#> [1] "Your passable excuse almost makes up for everything else, you magnificent son of a biscuit."
+#> [1] "It's honestly surprising how flipping not entirely terrible your reply-all is, considering."
 compliment(mood = "grumpy", profanity = "weird")
-#> [1] "Your adequate small talk is the least of your problems. In a good way, you magnificent space walrus."
+#> [1] "It's honestly surprising how heckity-heck adequate your parking job is, considering."
 compliment(mood = "dramatic", shakespearean = TRUE)
-#> [1] "Thy immortal deed shall outlive the very stars!"
+#> [1] "Behold! A name so undying the gods themselves do tremble!"
 compliment(mood = "grumpy", shakespearean = TRUE, weirdness = 1)
-#> [1] "Forsooth, thy shadowe hums with eldritch energies unknown to natural philosophy."
+#> [1] "Alchemy cannot explain thy fey aura."
 ```
 
 ## Farewells
@@ -98,16 +99,42 @@ farewell(mood = "cheerful", shakespearean = TRUE)
 
 ``` r
 compliment_of_the_day("2026-01-01")
-#> [1] "You have a remarkably insightful perspective."
+#> [1] "Few people have a judgment as wonderful as yours."
 farewell_of_the_day("2026-01-01", mood = "grumpy")
 #> [1] "Off you go. Don't make it weird."
 ```
 
+## A compliment every time R starts
+
+R runs your user `.Rprofile` at the start of every session, including a restart.
+`usethis::edit_r_profile()` opens it, creating it if needed; on Windows it is usually in your Documents folder.
+Add:
+
+``` r
+if (interactive() && requireNamespace("pleasantry", quietly = TRUE)) {
+  message(pleasantry::compliment())
+}
+```
+
+`interactive()` keeps the compliment out of `Rscript`, `R CMD check` and knitting, and `requireNamespace()` keeps a missing package from breaking startup.
+Calling `pleasantry::compliment()` without `library()` leaves your search path alone, and `message()` keeps the compliment out of any output you capture.
+
+Swap in `compliment_of_the_day()` for the same compliment all day, or pass any arguments you like, such as `compliment(mood = "grumpy", weirdness = 0.5)`.
+To say goodbye when R closes, add:
+
+``` r
+.Last <- function() if (interactive()) message(pleasantry::farewell())
+```
+
+A project’s own `.Rprofile`, such as the one renv writes, replaces your user one.
+To keep the compliment in such a project, add `source("~/.Rprofile")` at the top of the project’s file.
+
 ## How this was built
 
 Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s [Modern R workflow (ft. Positron and AI)](https://github.com/posit-conf-2026/modern-r-workflow) workshop on Monday, September 14, using Positron Assistant throughout, and built out afterwards until the workshop’s allocated AI credits ran out.
+The rename to pleasantry, the move to the repository root, the later rounds of defect fixes and the expanded word lists were done with Claude Code.
 
-The full development conversation is kept on the [`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts) branch as Markdown, HTML and JSON, so the workflow that produced the package is readable alongside the result – design dead ends included: the `weirdness` argument went through four designs before the three-tier version, and a late refactor collapsed two redundant arguments into the single five-level `profanity`.
+The full development conversation with Positron Assistant is kept on the [`dev-transcripts`](https://github.com/amelia-m/pleasantry/tree/dev-transcripts) branch as Markdown, HTML and JSON, so the workflow that produced the package is readable alongside the result – design dead ends included: the `weirdness` argument went through four designs before the three-tier version, and a late refactor collapsed two redundant arguments into the single five-level `profanity`.
 A much shorter summary is in `dev-history.md`.
 
 It lives on its own branch because it is 15 MB against a 12 KB package, and installing from GitHub fetches a snapshot of the default branch.

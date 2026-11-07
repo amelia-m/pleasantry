@@ -24,7 +24,10 @@ only mood content, \code{0.5} draws only quirky content, \code{1} draws only
 bizarre content, and intermediate values blend the two adjacent
 tiers. When \code{shakespearean = TRUE}, the quirky tier is omitted and
 \code{weirdness} blends linearly between the mood's Shakespearean bank and
-a bizarre Shakespearean bank.}
+a bizarre Shakespearean bank. A few templates only take adjectives
+chosen for them, such as the plainer insults in the \code{"grumpy"} mood;
+their adjective then comes from the template's own tier rather than
+being drawn independently.}
 
 \item{mood}{The tone of the compliment: \code{"sincere"} (default),
 \code{"grumpy"} (backhanded compliments), \code{"cheerful"} (over-the-top

@@ -11,12 +11,11 @@ test_that("farewell_of_the_day() is reproducible for the same date", {
 })
 
 test_that("farewell_of_the_day() does not disturb the global RNG state", {
-  set.seed(99)
-  before <- runif(5)
-
-  set.seed(99)
-  farewell_of_the_day("2026-06-01")
-  after <- runif(5)
+  before <- withr::with_seed(99, runif(5))
+  after <- withr::with_seed(99, {
+    farewell_of_the_day("2026-06-01")
+    runif(5)
+  })
 
   expect_identical(before, after)
 })
