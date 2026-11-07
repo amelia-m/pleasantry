@@ -87,11 +87,11 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">101</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your resilient spirit is truly inspiring."</span></span>
+<span><span class="co">#&gt; [1] "You have a remarkably resilient spirit."</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Few people have a work ethic as generous as yours."</span></span>
-<span><span class="co">#&gt; [2] "Your thoughtful sense of humor is truly inspiring."</span></span>
-<span><span class="co">#&gt; [3] "Your mind is nothing short of inspiring."</span></span></code></pre></div>
+<span><span class="co">#&gt; [2] "Your sense of humor is nothing short of inspiring."</span></span>
+<span><span class="co">#&gt; [3] "Few people have a mind as inspiring as yours."</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="weirdness">Weirdness<a class="anchor" aria-label="anchor" href="#weirdness"></a>
 </h3>
@@ -101,7 +101,7 @@
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>weirdness <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Your aggressively pleasant email sign-off could headline a very small festival."</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>weirdness <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your belly button lint hums with a frequency only vaguely sentient whales can hear."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Your belly button lint hums with a frequency only suspiciously glowing whales can hear."</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mood">Mood<a class="anchor" aria-label="anchor" href="#mood"></a>
@@ -110,9 +110,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">303</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"grumpy"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your passable work is the least of your problems. In a good way."</span></span>
+<span><span class="co">#&gt; [1] "Nobody asked for your uninspired parking job, and yet."</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"dramatic"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your towering triumph will echo through eternity."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "The heavens themselves weep at your transcendent legacy."</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="profanity-and-shakespearean-styling">Profanity and Shakespearean styling<a class="anchor" aria-label="anchor" href="#profanity-and-shakespearean-styling"></a>
@@ -122,13 +122,13 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">404</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"grumpy"</span>, profanity <span class="op">=</span> <span class="st">"tame"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your passable excuse almost makes up for everything else, you magnificent son of a biscuit."</span></span>
+<span><span class="co">#&gt; [1] "It's honestly surprising how flipping not entirely terrible your reply-all is, considering."</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"grumpy"</span>, profanity <span class="op">=</span> <span class="st">"weird"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Your adequate small talk is the least of your problems. In a good way, you magnificent space walrus."</span></span>
+<span><span class="co">#&gt; [1] "It's honestly surprising how heckity-heck adequate your parking job is, considering."</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"dramatic"</span>, shakespearean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Thy immortal deed shall outlive the very stars!"</span></span>
+<span><span class="co">#&gt; [1] "Behold! A name so undying the gods themselves do tremble!"</span></span>
 <span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span>mood <span class="op">=</span> <span class="st">"grumpy"</span>, shakespearean <span class="op">=</span> <span class="cn">TRUE</span>, weirdness <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Forsooth, thy shadowe hums with eldritch energies unknown to natural philosophy."</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Alchemy cannot explain thy fey aura."</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -150,15 +150,29 @@
 <p><code><a href="reference/compliment_of_the_day.html">compliment_of_the_day()</a></code> and <code><a href="reference/farewell_of_the_day.html">farewell_of_the_day()</a></code> return a single result that is deterministic for a given date, without disturbing the global RNG state:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/compliment_of_the_day.html">compliment_of_the_day</a></span><span class="op">(</span><span class="st">"2026-01-01"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "You have a remarkably insightful perspective."</span></span>
+<span><span class="co">#&gt; [1] "Few people have a judgment as wonderful as yours."</span></span>
 <span><span class="fu"><a href="reference/farewell_of_the_day.html">farewell_of_the_day</a></span><span class="op">(</span><span class="st">"2026-01-01"</span>, mood <span class="op">=</span> <span class="st">"grumpy"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Off you go. Don't make it weird."</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="a-compliment-every-time-r-starts">A compliment every time R starts<a class="anchor" aria-label="anchor" href="#a-compliment-every-time-r-starts"></a>
+</h2>
+<p>R runs your user <code>.Rprofile</code> at the start of every session, including a restart. <code>usethis::edit_r_profile()</code> opens it, creating it if needed; on Windows it is usually in your Documents folder. Add:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pleasantry"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu">pleasantry</span><span class="fu">::</span><span class="fu"><a href="reference/compliment.html">compliment</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code> keeps the compliment out of <code>Rscript</code>, <code>R CMD check</code> and knitting, and <code><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace()</a></code> keeps a missing package from breaking startup. Calling <code><a href="reference/compliment.html">pleasantry::compliment()</a></code> without <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> leaves your search path alone, and <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> keeps the compliment out of any output you capture.</p>
+<p>Swap in <code><a href="reference/compliment_of_the_day.html">compliment_of_the_day()</a></code> for the same compliment all day, or pass any arguments you like, such as <code>compliment(mood = "grumpy", weirdness = 0.5)</code>. To say goodbye when R closes, add:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">.Last</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu">pleasantry</span><span class="fu">::</span><span class="fu"><a href="reference/farewell.html">farewell</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>A project’s own <code>.Rprofile</code>, such as the one renv writes, replaces your user one. To keep the compliment in such a project, add <code>source("~/.Rprofile")</code> at the top of the project’s file.</p>
+</div>
+<div class="section level2">
 <h2 id="how-this-was-built">How this was built<a class="anchor" aria-label="anchor" href="#how-this-was-built"></a>
 </h2>
-<p>Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s <a href="https://github.com/posit-conf-2026/modern-r-workflow" class="external-link">Modern R workflow (ft. Positron and AI)</a> workshop on Monday, September 14, using Positron Assistant throughout, and built out afterwards until the workshop’s allocated AI credits ran out.</p>
-<p>The full development conversation is kept on the <a href="https://github.com/amelia-m/pleasantry/tree/dev-transcripts" class="external-link"><code>dev-transcripts</code></a> branch as Markdown, HTML and JSON, so the workflow that produced the package is readable alongside the result – design dead ends included: the <code>weirdness</code> argument went through four designs before the three-tier version, and a late refactor collapsed two redundant arguments into the single five-level <code>profanity</code>. A much shorter summary is in <code>dev-history.md</code>.</p>
+<p>Written at posit::conf(2026) in Hadley Wickham and Jenny Bryan’s <a href="https://github.com/posit-conf-2026/modern-r-workflow" class="external-link">Modern R workflow (ft. Positron and AI)</a> workshop on Monday, September 14, using Positron Assistant throughout, and built out afterwards until the workshop’s allocated AI credits ran out. The rename to pleasantry, the move to the repository root, the later rounds of defect fixes and the expanded word lists were done with Claude Code.</p>
+<p>The full development conversation with Positron Assistant is kept on the <a href="https://github.com/amelia-m/pleasantry/tree/dev-transcripts" class="external-link"><code>dev-transcripts</code></a> branch as Markdown, HTML and JSON, so the workflow that produced the package is readable alongside the result – design dead ends included: the <code>weirdness</code> argument went through four designs before the three-tier version, and a late refactor collapsed two redundant arguments into the single five-level <code>profanity</code>. A much shorter summary is in <code>dev-history.md</code>.</p>
 <p>It lives on its own branch because it is 15 MB against a 12 KB package, and installing from GitHub fetches a snapshot of the default branch.</p>
 </div>
 </div>

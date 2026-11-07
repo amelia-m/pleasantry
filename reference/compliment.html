@@ -86,7 +86,10 @@ only mood content, <code>0.5</code> draws only quirky content, <code>1</code> dr
 bizarre content, and intermediate values blend the two adjacent
 tiers. When <code>shakespearean = TRUE</code>, the quirky tier is omitted and
 <code>weirdness</code> blends linearly between the mood's Shakespearean bank and
-a bizarre Shakespearean bank.</p></dd>
+a bizarre Shakespearean bank. A few templates only take adjectives
+chosen for them, such as the plainer insults in the <code>"grumpy"</code> mood;
+their adjective then comes from the template's own tier rather than
+being drawn independently.</p></dd>
 
 
 <dt id="arg-mood">mood<a class="anchor" aria-label="anchor" href="#arg-mood"></a></dt>
@@ -118,31 +121,31 @@ structure. Each mood has its own Shakespearean bank.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your attitude is nothing short of inspiring."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your sense of wonder is nothing short of radiant."</span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your creative perspective is truly inspiring."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "People admire your inspiring sense of humor." </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your energy is nothing short of creative."    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Few people have a curiosity as radiant as yours." </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "People admire your courageous curiosity."         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your generous sense of wonder is truly inspiring."</span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span>, weirdness <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your parking skill is the good kind of quietly excellent."                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Someone definitely brags about your quietly excellent spreadsheet habit at parties."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your meticulous playlist curation could headline a very small festival."            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Someone definitely brags about your underrated label-maker technique at parties."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Your underrated sourdough schedule has strong main-character energy."            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your meticulous mug collection has strong main-character energy."                </span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span>, mood <span class="op">=</span> <span class="st">"grumpy"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your mildly acceptable typing speed almost makes up for everything else."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Your surprisingly decent attendance almost makes up for everything else."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your small talk is tolerable. I'll give you that."                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your passable effort almost makes up for everything else."                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "It's honestly surprising how not entirely terrible your reply-all is, considering."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "For you, that is a remarkably survivable attempt."                                 </span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span>, mood <span class="op">=</span> <span class="st">"dramatic"</span>, shakespearean <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Eternity itself doth envy thy thunderous legend."          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Behold! A glory so exalted the gods themselves do tremble!"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "When empires fall, thy thunderous triumph shall remain."   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Eternity itself doth envy thy thunderous legend."        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Behold! A crown so dread the gods themselves do tremble!"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Thy eternal glory shall outlive the very stars!"         </span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span>, mood <span class="op">=</span> <span class="st">"grumpy"</span>, profanity <span class="op">=</span> <span class="st">"tame"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your passable small talk almost makes up for everything else, you magnificent son of a biscuit."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Your fudging tolerable effort is the least of your problems. In a good way."                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your gosh-darn competent-ish work almost makes up for everything else."                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "For you, that is a remarkably gosh-darn borderline impressive typing speed."                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Your flipping borderline impressive effort is the least of your problems. In a good way."     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your small talk is surprisingly decent. I'll give you that, you magnificent son of a biscuit."</span>
 <span class="r-in"><span><span class="fu">compliment</span><span class="op">(</span><span class="fl">3</span>, mood <span class="op">=</span> <span class="st">"grumpy"</span>, profanity <span class="op">=</span> <span class="st">"weird"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Your mildly acceptable work almost makes up for everything else, and I blorping mean it."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Your blorping competent-ish typing speed almost makes up for everything else."           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Your attendance is heckity-heck passable. I'll give you that."                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Nobody asked for your blorping onerous meeting behavior, and yet."                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Nobody asked for your joyless small talk, and yet, no bullhonky, said the raccoon oracle."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Nobody asked for your uninspired excuse, and yet, no bullhonky, said the raccoon oracle." </span>
 </code></pre></div>
     </div>
   </div>
