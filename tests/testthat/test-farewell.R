@@ -21,6 +21,18 @@ test_that("farewell() errors for invalid arguments", {
   expect_snapshot(farewell(shakespearean = "yes"), error = TRUE)
 })
 
+test_that("farewell(): missing or non-finite n gave R's own error", {
+  for (n in list(NA_real_, NA_integer_, NaN, Inf)) {
+    expect_no_warning(
+      expect_error(farewell(n), "must be a single positive whole number")
+    )
+  }
+})
+
+test_that("farewell(): n beyond the integer range gave R's own error", {
+  expect_no_warning(expect_error(farewell(3e9), "must be at most"))
+})
+
 test_that("farewell() adds profanity when requested", {
   withr::local_seed(1357)
   result <- farewell(20, profanity = "strong")

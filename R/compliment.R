@@ -50,12 +50,11 @@ compliment <- function(
   profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
-  if (!is.numeric(n) || length(n) != 1 || n < 1 || n != as.integer(n)) {
-    cli::cli_abort("{.arg n} must be a single positive whole number.")
-  }
+  check_n(n)
   if (
     !is.numeric(weirdness) ||
       length(weirdness) != 1 ||
+      !is.finite(weirdness) ||
       weirdness < 0 ||
       weirdness > 1
   ) {
@@ -128,4 +127,27 @@ compliment <- function(
   }
 
   vapply(seq_len(n), \(i) build_one(), character(1))
+}
+
+# Shared by compliment() and farewell(). Finiteness comes before any
+# comparison, so NA, NaN and Inf get the package's message rather than R's
+# "missing value where TRUE/FALSE needed"; trunc() rather than as.integer(),
+# which warns and gives NA beyond the integer range.
+check_n <- function(n, call = parent.frame()) {
+  if (
+    !is.numeric(n) ||
+      length(n) != 1 ||
+      !is.finite(n) ||
+      n < 1 ||
+      n != trunc(n)
+  ) {
+    cli::cli_abort("{.arg n} must be a single positive whole number.", call = call)
+  }
+  if (n > .Machine$integer.max) {
+    cli::cli_abort(
+      "{.arg n} must be at most {(.Machine$integer.max)}.",
+      call = call
+    )
+  }
+  invisible(n)
 }

@@ -31,9 +31,7 @@ farewell <- function(
   profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
-  if (!is.numeric(n) || length(n) != 1 || n < 1 || n != as.integer(n)) {
-    cli::cli_abort("{.arg n} must be a single positive whole number.")
-  }
+  check_n(n)
   mood <- match.arg(mood)
   profanity <- match.arg(profanity)
   if (
