@@ -91,6 +91,9 @@ compliment <- function(
   build_one <- \() {
     group <- pick_group(pick_bank())
     template <- sample(group$templates, 1)
+    # The template stays the same across redraws, so its stems are worked out
+    # once here rather than on every pass through the loop.
+    template_stems <- word_stems(template)
     tries <- 0
     repeat {
       # A bank where every draw repeats a word would otherwise never return.
@@ -110,11 +113,14 @@ compliment <- function(
       adjective <- sample(adjectives, 1)
       subject <- sample(pick_bank()$subjects, 1)
       # Avoid repeated words across the adjective, subject and template (e.g.
-      # "glorious" and "glory", or "inspiring" in "truly inspiring").
+      # "glorious" and "glory", or "inspiring" in "truly inspiring"). Same
+      # test as stems_clash(), on stems computed once per draw.
+      adjective_stems <- word_stems(adjective)
+      subject_stems <- word_stems(subject)
       if (
-        !stems_clash(adjective, subject) &&
-          !stems_clash(adjective, template) &&
-          !stems_clash(subject, template)
+        !any(adjective_stems %in% subject_stems) &&
+          !any(adjective_stems %in% template_stems) &&
+          !any(subject_stems %in% template_stems)
       ) {
         break
       }
