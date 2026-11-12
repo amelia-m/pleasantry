@@ -147,7 +147,10 @@ check_n <- function(n, call = parent.frame()) {
       n < 1 ||
       n != trunc(n)
   ) {
-    cli::cli_abort("{.arg n} must be a single positive whole number.", call = call)
+    cli::cli_abort(
+      "{.arg n} must be a single positive whole number.",
+      call = call
+    )
   }
   if (n > .Machine$integer.max) {
     cli::cli_abort(
