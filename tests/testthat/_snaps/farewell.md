@@ -5,6 +5,7 @@
     Condition
       Error in `farewell()`:
       ! `n` must be a single positive whole number.
+      i Half a goodbye is just lingering.
 
 ---
 

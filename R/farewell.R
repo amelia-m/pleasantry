@@ -31,7 +31,7 @@ farewell <- function(
   profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
-  check_n(n)
+  check_n(n, "farewell")
   mood <- match.arg(mood)
   profanity <- match.arg(profanity)
   if (

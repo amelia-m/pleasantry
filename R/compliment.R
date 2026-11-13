@@ -50,7 +50,7 @@ compliment <- function(
   profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
-  check_n(n)
+  check_n(n, "compliment")
   if (
     !is.numeric(weirdness) ||
       length(weirdness) != 1 ||
@@ -58,7 +58,10 @@ compliment <- function(
       weirdness < 0 ||
       weirdness > 1
   ) {
-    cli::cli_abort("{.arg weirdness} must be a single number between 0 and 1.")
+    cli::cli_abort(c(
+      "{.arg weirdness} must be a single number between 0 and 1.",
+      i = "Even the weird ones have limits."
+    ))
   }
   mood <- match.arg(mood)
   profanity <- match.arg(profanity)
@@ -138,8 +141,15 @@ compliment <- function(
 # Shared by compliment() and farewell(). Finiteness comes before any
 # comparison, so NA, NaN and Inf get the package's message rather than R's
 # "missing value where TRUE/FALSE needed"; trunc() rather than as.integer(),
-# which warns and gives NA beyond the integer range.
-check_n <- function(n, call = parent.frame()) {
+# which warns and gives NA beyond the integer range. Each error adds one
+# fixed joke as an "i" line; never a random one, which would use the RNG
+# and change the caller's seeded results.
+check_n <- function(
+  n,
+  kind = c("compliment", "farewell"),
+  call = parent.frame()
+) {
+  kind <- match.arg(kind)
   if (
     !is.numeric(n) ||
       length(n) != 1 ||
@@ -148,13 +158,23 @@ check_n <- function(n, call = parent.frame()) {
       n != trunc(n)
   ) {
     cli::cli_abort(
-      "{.arg n} must be a single positive whole number.",
+      c(
+        "{.arg n} must be a single positive whole number.",
+        i = switch(
+          kind,
+          compliment = "Half a compliment is just an insult with good timing.",
+          farewell = "Half a goodbye is just lingering."
+        )
+      ),
       call = call
     )
   }
   if (n > .Machine$integer.max) {
     cli::cli_abort(
-      "{.arg n} must be at most {(.Machine$integer.max)}.",
+      c(
+        "{.arg n} must be at most {(.Machine$integer.max)}.",
+        i = "That is more {kind}s than anyone has earned. Even you."
+      ),
       call = call
     )
   }
