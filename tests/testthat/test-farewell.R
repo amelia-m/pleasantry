@@ -29,8 +29,9 @@ test_that("farewell(): missing or non-finite n gave R's own error", {
   }
 })
 
-test_that("farewell(): n beyond the integer range gave R's own error", {
+test_that("farewell(): n beyond the integer range gave R's own error and a warning", {
   expect_no_warning(expect_error(farewell(3e9), "must be at most"))
+  expect_error(farewell(3e9), "more farewells than anyone has earned")
 })
 
 test_that("farewell() adds profanity when requested", {

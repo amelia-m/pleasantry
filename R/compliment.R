@@ -121,9 +121,9 @@ compliment <- function(
       adjective_stems <- word_stems(adjective)
       subject_stems <- word_stems(subject)
       if (
-        !any(adjective_stems %in% subject_stems) &&
-          !any(adjective_stems %in% template_stems) &&
-          !any(subject_stems %in% template_stems)
+        !stems_overlap(adjective_stems, subject_stems) &&
+          !stems_overlap(adjective_stems, template_stems) &&
+          !stems_overlap(subject_stems, template_stems)
       ) {
         break
       }

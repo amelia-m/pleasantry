@@ -31,6 +31,7 @@ test_that("missing or non-finite n gave R's own error", {
 
 test_that("n beyond the integer range gave R's own error and a warning", {
   expect_no_warning(expect_error(compliment(3e9), "must be at most"))
+  expect_error(compliment(3e9), "more compliments than anyone has earned")
 })
 
 test_that("missing weirdness gave R's own error", {
