@@ -607,7 +607,12 @@ word_stems <- function(text) {
 }
 
 stems_clash <- function(x, y) {
-  length(intersect(word_stems(x), word_stems(y))) > 0
+  stems_overlap(word_stems(x), word_stems(y))
+}
+
+# The same test on stems already worked out, for callers that reuse them.
+stems_overlap <- function(a, b) {
+  length(intersect(a, b)) > 0
 }
 
 # ---- Indefinite articles ---------------------------------------------------

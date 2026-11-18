@@ -21,6 +21,46 @@ test_that("compliment() errors for invalid weirdness", {
   expect_snapshot(compliment(weirdness = "high"), error = TRUE)
 })
 
+test_that("missing or non-finite n gave R's own error", {
+  for (n in list(NA_real_, NA_integer_, NaN, Inf)) {
+    expect_no_warning(
+      expect_error(compliment(n), "must be a single positive whole number")
+    )
+  }
+})
+
+test_that("n beyond the integer range gave R's own error and a warning", {
+  expect_no_warning(expect_error(compliment(3e9), "must be at most"))
+  expect_error(compliment(3e9), "more compliments than anyone has earned")
+})
+
+test_that("missing weirdness gave R's own error", {
+  for (weirdness in list(NA_real_, NaN)) {
+    expect_no_warning(
+      expect_error(
+        compliment(weirdness = weirdness),
+        "must be a single number between 0 and 1"
+      )
+    )
+  }
+})
+
+test_that("other invalid n and weirdness keep the package's error", {
+  for (n in list(NA, -Inf, 2.5, c(1, 2), TRUE)) {
+    expect_no_warning(
+      expect_error(compliment(n), "must be a single positive whole number")
+    )
+  }
+  for (weirdness in list(NA, Inf, -Inf)) {
+    expect_no_warning(
+      expect_error(
+        compliment(weirdness = weirdness),
+        "must be a single number between 0 and 1"
+      )
+    )
+  }
+})
+
 test_that("weirdness = 0 always draws every component from the classic pool", {
   result <- compliment(20, weirdness = 0)
   expect_false(any(grepl(

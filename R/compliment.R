@@ -50,16 +50,18 @@ compliment <- function(
   profanity = c("none", "tame", "mild", "strong", "weird"),
   shakespearean = FALSE
 ) {
-  if (!is.numeric(n) || length(n) != 1 || n < 1 || n != as.integer(n)) {
-    cli::cli_abort("{.arg n} must be a single positive whole number.")
-  }
+  check_n(n, "compliment")
   if (
     !is.numeric(weirdness) ||
       length(weirdness) != 1 ||
+      !is.finite(weirdness) ||
       weirdness < 0 ||
       weirdness > 1
   ) {
-    cli::cli_abort("{.arg weirdness} must be a single number between 0 and 1.")
+    cli::cli_abort(c(
+      "{.arg weirdness} must be a single number between 0 and 1.",
+      i = "Even the weird ones have limits."
+    ))
   }
   mood <- match.arg(mood)
   profanity <- match.arg(profanity)
@@ -92,6 +94,9 @@ compliment <- function(
   build_one <- \() {
     group <- pick_group(pick_bank())
     template <- sample(group$templates, 1)
+    # The template stays the same across redraws, so its stems are worked out
+    # once here rather than on every pass through the loop.
+    template_stems <- word_stems(template)
     tries <- 0
     repeat {
       # A bank where every draw repeats a word would otherwise never return.
@@ -111,11 +116,14 @@ compliment <- function(
       adjective <- sample(adjectives, 1)
       subject <- sample(pick_bank()$subjects, 1)
       # Avoid repeated words across the adjective, subject and template (e.g.
-      # "glorious" and "glory", or "inspiring" in "truly inspiring").
+      # "glorious" and "glory", or "inspiring" in "truly inspiring"). Same
+      # test as stems_clash(), on stems computed once per draw.
+      adjective_stems <- word_stems(adjective)
+      subject_stems <- word_stems(subject)
       if (
-        !stems_clash(adjective, subject) &&
-          !stems_clash(adjective, template) &&
-          !stems_clash(subject, template)
+        !stems_overlap(adjective_stems, subject_stems) &&
+          !stems_overlap(adjective_stems, template_stems) &&
+          !stems_overlap(subject_stems, template_stems)
       ) {
         break
       }
@@ -128,4 +136,47 @@ compliment <- function(
   }
 
   vapply(seq_len(n), \(i) build_one(), character(1))
+}
+
+# Shared by compliment() and farewell(). Finiteness comes before any
+# comparison, so NA, NaN and Inf get the package's message rather than R's
+# "missing value where TRUE/FALSE needed"; trunc() rather than as.integer(),
+# which warns and gives NA beyond the integer range. Each error adds one
+# fixed joke as an "i" line; never a random one, which would use the RNG
+# and change the caller's seeded results.
+check_n <- function(
+  n,
+  kind = c("compliment", "farewell"),
+  call = parent.frame()
+) {
+  kind <- match.arg(kind)
+  if (
+    !is.numeric(n) ||
+      length(n) != 1 ||
+      !is.finite(n) ||
+      n < 1 ||
+      n != trunc(n)
+  ) {
+    cli::cli_abort(
+      c(
+        "{.arg n} must be a single positive whole number.",
+        i = switch(
+          kind,
+          compliment = "Half a compliment is just an insult with good timing.",
+          farewell = "Half a goodbye is just lingering."
+        )
+      ),
+      call = call
+    )
+  }
+  if (n > .Machine$integer.max) {
+    cli::cli_abort(
+      c(
+        "{.arg n} must be at most {(.Machine$integer.max)}.",
+        i = "That is more {kind}s than anyone has earned. Even you."
+      ),
+      call = call
+    )
+  }
+  invisible(n)
 }

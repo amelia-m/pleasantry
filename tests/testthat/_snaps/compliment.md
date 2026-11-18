@@ -5,6 +5,7 @@
     Condition
       Error in `compliment()`:
       ! `n` must be a single positive whole number.
+      i Half a compliment is just an insult with good timing.
 
 ---
 
@@ -13,6 +14,7 @@
     Condition
       Error in `compliment()`:
       ! `n` must be a single positive whole number.
+      i Half a compliment is just an insult with good timing.
 
 ---
 
@@ -21,6 +23,7 @@
     Condition
       Error in `compliment()`:
       ! `n` must be a single positive whole number.
+      i Half a compliment is just an insult with good timing.
 
 # compliment() errors for invalid weirdness
 
@@ -29,6 +32,7 @@
     Condition
       Error in `compliment()`:
       ! `weirdness` must be a single number between 0 and 1.
+      i Even the weird ones have limits.
 
 ---
 
@@ -37,6 +41,7 @@
     Condition
       Error in `compliment()`:
       ! `weirdness` must be a single number between 0 and 1.
+      i Even the weird ones have limits.
 
 ---
 
@@ -45,6 +50,7 @@
     Condition
       Error in `compliment()`:
       ! `weirdness` must be a single number between 0 and 1.
+      i Even the weird ones have limits.
 
 # compliment() errors for invalid mood, profanity, and shakespearean
 
