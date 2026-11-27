@@ -81,7 +81,6 @@
 <code>R CMD check</code> run from a git worktree gives a second NOTE, a hidden <code>.git</code> file, because a worktree’s <code>.git</code> is a file and ends up in the tarball; a normal checkout does not. Add <code>^\.git$</code> to <code>.Rbuildignore</code>, or leave it?</li>
 <li>
 <code>check_n()</code> lives in <code>R/compliment.R</code> though <code><a href="reference/farewell.html">farewell()</a></code> uses it too. Move it to its own utilities file? (Branch review, 2026-11-13.)</li>
-<li>Worktrees <code>_scratch/wt-args</code> and <code>_scratch/wt-base</code>, and the folders <code>_scratch/wt-args-check</code> and <code>_scratch/wt-base-check</code>, are left from the 2026-11-12 unattended run; remove them with <code>git worktree remove</code> once <code>fix/args-and-speed</code> is reviewed.</li>
 </ul></div>
 
   </div>
